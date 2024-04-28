@@ -1,2 +1,3 @@
-# digitalparent
+# Mindparents
+
 website about digital parenting
