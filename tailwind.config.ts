@@ -5,6 +5,7 @@ const config: Config = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./features/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -19,7 +20,16 @@ const config: Config = {
           black: "#00000",
         },
       },
+      boxShadow: {
+        right: "14px 4px 20px -7px rgba(0,0,0,0.6)",
+      },
       fontSize: {
+        "text-xs": [
+          "12px",
+          {
+            lineHeight: "18px",
+          },
+        ],
         "text-s": [
           "14px",
           {
