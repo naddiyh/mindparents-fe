@@ -1,0 +1,48 @@
+export const DataArticle = [
+  {
+    id: 1,
+    title: "Masa Kehamilan",
+    img: "/images/happyfam.webp",
+    content: "Content 1",
+    name: "Author 1",
+    createdAt: "2024-05-20T12:00:00Z",
+    desc: "yyy",
+  },
+  {
+    id: 2,
+    title: "Masa Kehamilan",
+    img: "/images/cheerfam.webp",
+    content: "Content 2",
+    name: "Author 2",
+    createdAt: "2024-05-19T12:00:00Z",
+    desc: "yyy",
+  },
+  {
+    id: 4,
+    title: "Masa Kehamilan",
+    img: "/images/cheerfam.webp",
+    content: "Content 3",
+    name: "Author 3",
+    createdAt: "2024-05-18T12:00:00Z",
+    desc: "yyy",
+  },
+  {
+    id: 5,
+    title: "Perkembangan Anak",
+    img: "/images/sweetfam.webp",
+    content: "Content 3",
+    name: "Author 3",
+
+    createdAt: "2024-05-18T12:00:00Z",
+    desc: "yyy",
+  },
+  {
+    id: 6,
+    title: "Perkembangan Anak",
+    img: "/images/cheerfam.webp",
+    content: "Content 3",
+    name: "Author 3",
+    createdAt: "2024-05-18T12:00:00Z",
+    desc: "yyy",
+  },
+];
