@@ -3,7 +3,6 @@ import Link from "next/link";
 import Caraousel from "./CaraouselHero";
 import { PrimaryButton } from "../atoms";
 import TypeWriter from "./Typewrites";
-import { useState } from "react";
 
 const Hero = () => {
   return (

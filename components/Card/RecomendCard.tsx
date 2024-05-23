@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { IRecomendArticle } from "@/interface/recomendArticle";
-import { PrimaryButton } from "../atoms";
+
 import Link from "next/link";
 
 const RecomendCard: React.FC<IRecomendArticle> = ({ ItemArticle }) => {

@@ -2,7 +2,6 @@ import { TfiClose } from "react-icons/tfi";
 import Navitems from "./Navitems";
 import { FaCircleUser } from "react-icons/fa6";
 import { PrimaryButton } from "../atoms/index";
-import { useState, useEffect } from "react";
 
 interface NavModalProps {
   className?: string;

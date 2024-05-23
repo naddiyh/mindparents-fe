@@ -2,13 +2,11 @@ import { navlink } from "@/constant/navLink";
 import Link from "next/link";
 import React from "react";
 import { useEffect, useState } from "react";
-import { FaCircleUser } from "react-icons/fa6";
 
 const Navitems = () => {
   const [isScroll, setIsScroll] = useState(false);
   const [isUnderlined, setIsUnderlined] = useState<number | null>(null);
 
-  const [isLogin, setIsLogin] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
@@ -63,8 +61,6 @@ const Navitems = () => {
             </div>
           </Link>
         ))}
-
-        {/* <FaCircleUser className="text-primary-purple" /> */}
       </section>
     </>
   );
