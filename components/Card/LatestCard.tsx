@@ -1,10 +1,8 @@
-"use client";
 import Image from "next/image";
 import React from "react";
 import { ILatestArticle } from "@/interface/latestArticle";
 import { formatUploadTime } from "@/utils/time";
 import { PrimaryButton } from "../atoms";
-
 const LatestCard: React.FC<ILatestArticle> = ({ ItemArticle }) => {
   return (
     <section className="container relative flex h-[340px] w-[350px] flex-col rounded-xl px-6 py-6 shadow-xl md:flex-row">
@@ -13,7 +11,7 @@ const LatestCard: React.FC<ILatestArticle> = ({ ItemArticle }) => {
         layout="fill"
         objectFit="cover"
         alt={""}
-        className=" rounded-xl brightness-75 "
+        className=" rounded-md brightness-75 "
       />
       <div className="relative z-10  flex h-full flex-col justify-between ">
         <PrimaryButton fullwidth={false}>{ItemArticle.title}</PrimaryButton>

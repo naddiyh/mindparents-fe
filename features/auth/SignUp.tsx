@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { PrimaryButton } from "@/components/atoms/index";
+import { PrimaryButton } from "@/components/atoms";
 import { FcGoogle } from "react-icons/fc";
 import { Auth } from "firebase/auth";
 
