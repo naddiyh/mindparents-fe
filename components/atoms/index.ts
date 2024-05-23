@@ -1,3 +1,4 @@
-export * from "./Buttons/PrimaryButton";
-export * from "./Buttons/CommentButton";
-export * from "./Buttons/SubArticleButton";
+export * from "./CommentButton";
+export * from "./PrimaryButton";
+export * from "./SubArticleButton";
+export * from "./UpButton";

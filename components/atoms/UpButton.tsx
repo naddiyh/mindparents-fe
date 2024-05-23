@@ -2,7 +2,7 @@
 import { SlArrowUp } from "react-icons/sl";
 import React from "react";
 
-const UpButton = () => {
+export const UpButton = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -23,5 +23,3 @@ const UpButton = () => {
     </main>
   );
 };
-
-export default UpButton;

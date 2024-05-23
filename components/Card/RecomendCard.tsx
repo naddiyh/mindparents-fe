@@ -1,25 +1,28 @@
-"use client";
 import Image from "next/image";
 import React from "react";
 import { IRecomendArticle } from "@/interface/recomendArticle";
 import { PrimaryButton } from "../atoms";
+import Link from "next/link";
 
 const RecomendCard: React.FC<IRecomendArticle> = ({ ItemArticle }) => {
   return (
-    <section className="relative flex justify-between gap-2 rounded-xl">
-      <div className="relative z-10 flex h-[] md:h-[150px] md:w-[200px]">
-        <Image
-          src={ItemArticle.img}
-          layout="fill"
-          alt={""}
-          objectFit="cover"
-          className="rounded-xl  "
-        />
-        <PrimaryButton fullwidth={false}>{ItemArticle.title}</PrimaryButton>
-      </div>
-      <div className=" z-10  ">
-        <p className="font-bold">{ItemArticle.title}</p>
-        <p> {ItemArticle.desc}</p>
+    <section className="flex flex-col gap-4 rounded-xl lg:flex-row">
+      <Image
+        src={ItemArticle.img}
+        width={620}
+        height={425}
+        alt={""}
+        objectFit="cover"
+        objectPosition="top"
+        className="rounded-md hover:brightness-75 lg:h-[150px] lg:w-[230px] "
+      />
+
+      <div className="z-10 ">
+        <Link href={""} className="hover:underline">
+          <p className="font-bold">{ItemArticle.title}</p>
+        </Link>
+
+        <p className="text-text-s md:text-text-m"> {ItemArticle.desc}</p>
       </div>
     </section>
   );
