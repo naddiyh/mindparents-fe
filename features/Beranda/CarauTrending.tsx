@@ -32,7 +32,7 @@ const CarauTrending = () => {
   }, [totalSlides, slideWidth, speed]);
 
   return (
-    <main className="my-10 flex flex-col gap-8">
+    <main className="flex flex-col gap-8 py-20">
       <div className="px-6 md:px-28">
         <SubArticleButton>Trending</SubArticleButton>
       </div>
