@@ -6,7 +6,7 @@ import Image from "next/image";
 import Navitems from "./Navitems";
 import NavModal from "./NavModal";
 
-const Navbar = ({ showBackground = true }) => {
+export const Navbar = ({ showBackground = true }) => {
   const [isScroll, setIsScroll] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -63,5 +63,3 @@ const Navbar = ({ showBackground = true }) => {
     </>
   );
 };
-
-export default Navbar;
