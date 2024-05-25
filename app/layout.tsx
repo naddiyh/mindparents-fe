@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import React from "react";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import Providers from "./providers";
+import { Toaster } from "react-hot-toast";
 
 const OpenSans = Open_Sans({
   display: "swap",
@@ -26,7 +29,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={OpenSans.className}>{children}</body>
+      <body className={OpenSans.className}>
+        <Providers>
+          {children}
+          <ReactQueryDevtools
+            initialIsOpen={false}
+            buttonPosition="bottom-left"
+          />
+        </Providers>
+        <Toaster
+          toastOptions={{
+            duration: 2000,
+          }}
+          position="top-right"
+        />
+      </body>
     </html>
   );
 }

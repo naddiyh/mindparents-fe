@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { PrimaryButton } from "@/components/atoms";
 import { FcGoogle } from "react-icons/fc";
+import { useAuth } from "./useAuth";
+import { TLoginForm } from "./types";
 
 interface IFormInput {
   nama: string;

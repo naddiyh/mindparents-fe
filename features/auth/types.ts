@@ -2,7 +2,7 @@ import { TRole } from "@/interface/user";
 
 export type TLoginForm = {
   email: string;
-  passwrod: string;
+  password: string;
   role?: TRole;
 };
 
@@ -10,8 +10,9 @@ export type TSingUpForm = {
   email: string;
   password: string;
   name: string;
-  birth_of_parent: string;
-  birth_of_child: string;
+  parentDob: string;
+  childDob: string;
+  topik: string;
 };
 
 export type TForgotPassword = {

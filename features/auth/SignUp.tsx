@@ -2,25 +2,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { PrimaryButton } from "@/components/atoms";
 import { FcGoogle } from "react-icons/fc";
-import { Auth } from "firebase/auth";
-
-enum TopikEnum {
-  Persiapan_Orang_Tua = "Persiapan Orang Tua",
-  Masa_Kehamilan = "Masa Kehamilan",
-  Perkembangan_Anak = "Perkembangan Anak",
-}
+import { useAuth } from "./useAuth";
 
 interface IFormInput {
-  topik: TopikEnum;
+  topik: string;
   name: string;
   email: string;
   password: string;
-  birth_of_parent: Date;
-  birth_of_child: Date;
+  parentDob: string;
+  childDob: string;
 }
 export const SignUp = () => {
+  const { signup, handleSigninWithGoogle } = useAuth();
   const {
     register,
     handleSubmit,
@@ -49,7 +43,8 @@ export const SignUp = () => {
           <section className="flex w-full flex-col gap-4 py-10 md:px-14">
             <section className="flex flex-col items-center gap-3 ">
               <form
-                onSubmit={handleSubmit(onSubmit)}
+                onSubmit={handleSubmit((values) => signup.mutateAsync(values))}
+                noValidate
                 className="flex w-full flex-col items-center gap-6 "
               >
                 <p className="text-heading-s font-bold text-primary-purple md:text-heading-m">
@@ -127,14 +122,14 @@ export const SignUp = () => {
 
                     <input
                       type="date"
-                      {...register("birth_of_parent", {
+                      {...register("parentDob", {
                         required: "Tanggal lahir wajib diisi",
                       })}
                       className="h-10 w-full rounded-md border p-2 pl-4"
                     />
-                    {errors.birth_of_parent && (
+                    {errors.parentDob && (
                       <p className="text-text-xs text-red-500">
-                        {errors.birth_of_parent.message}
+                        {errors.parentDob.message}
                       </p>
                     )}
                   </div>
@@ -146,14 +141,14 @@ export const SignUp = () => {
 
                     <input
                       type="date"
-                      {...register("birth_of_child", {
+                      {...register("childDob", {
                         required: "Tanggal lahir wajib diisi",
                       })}
                       className="h-10 w-full rounded-md border p-2 pl-4"
                     />
-                    {errors.birth_of_child && (
+                    {errors.childDob && (
                       <p className="text-text-xs text-red-500">
-                        {errors.birth_of_child.message}
+                        {errors.childDob.message}
                       </p>
                     )}
                   </div>
@@ -182,15 +177,22 @@ export const SignUp = () => {
                       </p>
                     )}
                   </div>
-                  <PrimaryButton fullwidth>
-                    <input type="submit" />
-                  </PrimaryButton>
+
+                  <button
+                    type="submit"
+                    className="w-full rounded-md bg-primary-purple p-2 text-white"
+                  >
+                    Daftar Akun
+                  </button>
                 </section>
               </form>
 
               <section className="flex flex-col items-center justify-center gap-4 py-2">
                 <p className="text-text-m">atau</p>
-                <button className="flex h-10 w-full items-center justify-center gap-2 rounded-md border text-text-s md:text-text-m">
+                <button
+                  className="flex h-10 w-full items-center justify-center gap-2 rounded-md border text-text-s md:text-text-m"
+                  onClick={handleSigninWithGoogle}
+                >
                   <FcGoogle className="h-5 w-5 md:h-6 md:w-6" />
                   Daftar dengan google
                 </button>
@@ -220,6 +222,3 @@ export const SignUp = () => {
     </>
   );
 };
-function useAuth(): { SignInWithGoogle: any } {
-  throw new Error("Function not implemented.");
-}

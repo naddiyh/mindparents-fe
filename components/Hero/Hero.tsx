@@ -3,11 +3,13 @@ import Link from "next/link";
 import Caraousel from "./CaraouselHero";
 import { PrimaryButton } from "../atoms";
 import TypeWriter from "./Typewrites";
+import { useRouter } from "next/navigation";
 
 const Hero = () => {
+  const router = useRouter();
   return (
     <>
-      <main className=" flex min-h-screen w-screen items-center px-6 pt-20 lg:px-28 ">
+      <main className=" flex h-screen w-screen items-center justify-center px-6 pt-10 lg:px-28 ">
         <section className="flex flex-1 flex-col gap-10 md:flex-row md:gap-8 lg:justify-between ">
           <section className="">
             <Caraousel />
@@ -27,13 +29,23 @@ const Hero = () => {
               </p>
             </div>
             <div className="flex flex-col gap-4 md:flex-row md:gap-10">
-              <Link href={"/auth/signup"} className="w-full">
-                <PrimaryButton fullwidth>Daftar</PrimaryButton>
-              </Link>
+              <PrimaryButton
+                fullwidth
+                onClick={async () => {
+                  router.push("/signup");
+                }}
+              >
+                Daftar
+              </PrimaryButton>
 
-              <Link href={"/auth/login"} className="w-full">
-                <PrimaryButton fullwidth>Masuk</PrimaryButton>
-              </Link>
+              <PrimaryButton
+                fullwidth
+                onClick={async () => {
+                  router.push("/login");
+                }}
+              >
+                Masuk
+              </PrimaryButton>
             </div>
           </section>
         </section>
