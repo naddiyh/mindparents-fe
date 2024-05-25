@@ -6,9 +6,10 @@ export interface IUser {
   email: string;
   role: TRole;
   photoURL: string | null;
-  password: string;
-  birth_of_parent: string;
-  birth_of_child: string;
+  emailVerified: boolean;
+  parentDob: string;
+  childDob: string;
+  topik: string;
   createdAt: string;
   updatedAt: string;
 }

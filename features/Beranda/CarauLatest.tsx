@@ -52,7 +52,7 @@ const LatestCarousel: React.FC = () => {
   }, [isClicked]);
 
   return (
-    <main className="flex w-full flex-col gap-8 px-6 pb-28 md:px-28">
+    <main className="flex w-full flex-col gap-8 px-6 pb-20 md:px-28">
       <SubArticleButton>Artikel Terbaru</SubArticleButton>
 
       <div className="flex items-center justify-center overflow-x-hidden rounded-xl md:rounded-sm">

@@ -9,7 +9,7 @@ const CarauRecomend = () => {
   return (
     <main className=" flex flex-col gap-6 px-6 md:px-28">
       <SubArticleButton>Artikel Rekomendasi</SubArticleButton>
-      <section className="flex w-full flex-1 flex-col gap-0 md:justify-between md:gap-6 lg:flex-row  ">
+      <section className="flex w-full flex-1 flex-col gap-10 md:justify-between md:gap-6 lg:flex-row  ">
         <section className="grid w-fit grid-flow-row gap-3">
           <Image
             src={"/images/happyfam.webp"}
@@ -18,19 +18,19 @@ const CarauRecomend = () => {
             alt=""
             objectFit="cover"
             objectPosition="top"
-            className="rounded-md"
+            className="rounded-md hover:brightness-50"
           />
           <div className="flex flex-col gap-2">
             <Link
               href={"/"}
-              className="text-text-l font-semibold hover:underline "
+              className="text-text-m font-bold hover:underline md:text-text-l "
             >
               Apa Saja Makanan Bergizi untuk Ibu Hamil?
             </Link>
-            <p>
+            <p className="text-text-s">
               Ibu hamil membutuhkan 1000 miligram kalsium yang bisa dibagi dalam
               dua dosis 500 miligram per hari. Sumber kalsium yang baik bisa
-              ditemukan pada susu, yoghurt, keju, ikan dan seafood yang rendah
+              ditemukan pada susu, yoghurt, keju, ikan dan seafood yang rendah
               merkuri
             </p>
           </div>
