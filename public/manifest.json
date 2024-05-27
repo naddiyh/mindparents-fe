@@ -1,0 +1,17 @@
+{
+  "theme_color": "#247ED6",
+  "background_color": "#77eed8",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "name": "MindParents",
+  "short_name": "MinPar",
+  "description": "Mental and Intelectual ",
+  "icons": [
+    {
+      "src": "/icons/mp.svg",
+      "sizes": "192x192",
+      "type": "svg/png"
+    }
+  ]
+}

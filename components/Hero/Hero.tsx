@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+
 import Caraousel from "./CaraouselHero";
 import { PrimaryButton } from "../atoms";
 import TypeWriter from "./Typewrites";
@@ -9,7 +9,7 @@ const Hero = () => {
   const router = useRouter();
   return (
     <>
-      <main className=" flex h-screen w-screen items-center justify-center px-6 pt-10 lg:px-28 ">
+      <main className=" mt-24 flex w-screen items-center justify-center px-6 pb-4 md:mt-52 md:pb-10  lg:px-28 ">
         <section className="flex flex-1 flex-col gap-10 md:flex-row md:gap-8 lg:justify-between ">
           <section className="">
             <Caraousel />

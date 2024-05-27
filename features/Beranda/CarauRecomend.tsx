@@ -5,7 +5,7 @@ import { recomendData } from "@/mock/recomendData";
 import Image from "next/image";
 import Link from "next/link";
 
-const CarauRecomend = () => {
+export const CarauRecomend = () => {
   return (
     <main className=" flex flex-col gap-6 px-6 md:px-28">
       <SubArticleButton>Artikel Rekomendasi</SubArticleButton>
@@ -44,5 +44,3 @@ const CarauRecomend = () => {
     </main>
   );
 };
-
-export default CarauRecomend;

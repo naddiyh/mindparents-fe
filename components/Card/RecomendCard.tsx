@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React from "react";
 import { IRecomendArticle } from "@/interface/recomendArticle";
-
 import Link from "next/link";
 
 const RecomendCard: React.FC<IRecomendArticle> = ({ ItemArticle }) => {
@@ -18,11 +17,11 @@ const RecomendCard: React.FC<IRecomendArticle> = ({ ItemArticle }) => {
       />
 
       <div className="z-10 ">
-        <Link href={""} className="hover:underline">
+        <Link href={`/pregnant/${ItemArticle.id}`} className="hover:underline">
           <p className="font-bold">{ItemArticle.title}</p>
-        </Link>
 
-        <p className="text-text-s md:text-text-m"> {ItemArticle.desc}</p>
+          <p className="text-text-s md:text-text-m"> {ItemArticle.desc}</p>
+        </Link>
       </div>
     </section>
   );
