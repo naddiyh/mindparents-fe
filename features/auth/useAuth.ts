@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { FirebaseError } from "firebase/app";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { login, signInWithGoogle, signup } from "./service";
 import { getFirebaseErrorMessage } from "@/utils/getFirebaseError";
@@ -54,7 +54,7 @@ export const useAuth = () => {
       Cookies.set("user", JSON.stringify(data));
       toast.dismiss();
       toast.success("Akun berhasil dibuat");
-      router.push("/page.tsx");
+      router.push("/#beranda");
     },
     onError: (error) => {
       toast.dismiss();
@@ -74,7 +74,7 @@ export const useAuth = () => {
       const user = await signInWithGoogle();
       Cookies.set("user", JSON.stringify(user));
       toast.success("Akun Berhasil Masuk");
-      router.push("/");
+      router.push("/#beranda");
     } catch (error) {
       toast.error(DEFAULT_ERROR);
     }

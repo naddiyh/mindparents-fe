@@ -8,11 +8,12 @@ import { useAuth } from "./useAuth";
 import { TLoginForm } from "./types";
 
 interface IFormInput {
-  nama: string;
+  topik: string;
+  name: string;
   email: string;
   password: string;
-  birth_of_parent: Date;
-  birth_of_child: Date;
+  parentDob: string;
+  childDob: string;
 }
 const PageLogin = () => {
   const {
@@ -82,12 +83,6 @@ const PageLogin = () => {
                       type="password"
                       {...register("password", {
                         required: "Password wajib diisi",
-                        pattern: {
-                          value:
-                            /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
-
-                          message: "Format kata sandi belum valid",
-                        },
                       })}
                       className="h-10 w-full rounded-md border p-2 pl-4"
                     />
@@ -98,11 +93,14 @@ const PageLogin = () => {
                     )}
                   </div>
                   <div className="flex flex-col gap-2 py-5">
-                    <PrimaryButton fullwidth>
+                    <PrimaryButton fullwidth border={false}>
                       <input type="submit" />
                     </PrimaryButton>
                     <div className="text-right">
-                      <Link href={""} className="text-text-s text-blue-500">
+                      <Link
+                        href={"/forgotpassword"}
+                        className="text-text-s text-blue-500"
+                      >
                         Lupa password?
                       </Link>
                     </div>

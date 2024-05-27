@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { IoMenu, IoCloseCircleOutline } from "react-icons/io5";
+import { IoMenu } from "react-icons/io5";
+
 import Image from "next/image";
 import Navitems from "./Navitems";
 import NavModal from "./NavModal";

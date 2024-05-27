@@ -12,11 +12,11 @@ export const UpButton = () => {
   return (
     <main
       title="Scroll To Top"
-      className="fixed bottom-8 right-6 z-10 scale-[0.9] select-none md:scale-100"
+      className="fixed bottom-[100px] right-[26px] z-10  select-none"
     >
       <button
         onClick={scrollToTop}
-        className="  flex aspect-square h-14 w-14 items-center justify-center rounded-[100%] bg-primary-purple bg-opacity-70 hover:bg-primary-purple-hover"
+        className="  flex aspect-square h-[57px] w-[57px] items-center justify-center rounded-[100%] bg-primary-purple opacity-80 shadow-xl hover:bg-primary-purple-hover"
       >
         <SlArrowUp className="h-7 w-7 text-white" />
       </button>
