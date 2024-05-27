@@ -1,19 +1,22 @@
 // components/LatestCarousel.tsx
 "use client";
 
-import React, { useEffect, useState } from "react";
-import LatestCard from "@/components/Card/LatestCard";
+import React, { useEffect, useState, useRef } from "react";
+import { LatestCard } from "@/components/Card";
 import {
   MdOutlineArrowBackIosNew,
   MdOutlineArrowForwardIos,
 } from "react-icons/md";
 import { DataArticle } from "@/mock/latestData";
 import { SubArticleButton } from "@/components/atoms";
+import useDraggableScroll from "use-draggable-scroll";
 
-const LatestCarousel: React.FC = () => {
+export const LatestCarousel: React.FC = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [latestArticles, setLatestArticles] = useState(DataArticle);
-  const [currentIndex, setCurrentIndex] = useState(1);
+  const ref = useRef(null);
+
+  const { onMouseDown } = useDraggableScroll(ref, { direction: "horizontal" });
 
   // Fungsi untuk slider ke kiri
   const leftClick = () => {
@@ -55,30 +58,35 @@ const LatestCarousel: React.FC = () => {
     <main className="flex w-full flex-col gap-8 px-6 pb-20 md:px-28">
       <SubArticleButton>Artikel Terbaru</SubArticleButton>
 
-      <div className="flex items-center justify-center overflow-x-hidden rounded-xl md:rounded-sm">
-        <div className="grid grid-flow-col gap-6">
+      <div className="relative flex items-center justify-center overflow-x-hidden rounded-xl md:rounded-sm">
+        {/* Draggable Scroll */}
+        <div
+          className="grid grid-flow-col gap-6"
+          ref={ref}
+          onMouseDown={onMouseDown}
+        >
           {latestArticles.map((ItemArticle) => (
             <LatestCard key={ItemArticle.id} ItemArticle={ItemArticle} />
           ))}
         </div>
-        <button
-          className="absolute left-5 z-10 scale-75 rounded-full  bg-purple-500 bg-opacity-60 p-2 hover:bg-opacity-30 md:left-28 md:scale-100"
-          onClick={() => leftClick()}
-        >
-          <MdOutlineArrowBackIosNew className="z-20 h-10 w-10  text-white" />
-        </button>
-        <button
-          className="absolute right-3 z-10  scale-75 rounded-full bg-purple-500  bg-opacity-60 p-2 hover:bg-opacity-30 md:right-28 md:scale-100"
-          onClick={() => rightClick()}
-        >
-          <MdOutlineArrowForwardIos className="z-20 h-10 w-10 text-white" />
-        </button>
+        <div className="absolute h-full w-full">
+          <button
+            className="absolute left-1 top-36 z-10 scale-90 rounded-full  bg-purple-500 bg-opacity-60 p-2 hover:bg-opacity-30 md:scale-100"
+            onClick={() => leftClick()}
+          >
+            <MdOutlineArrowBackIosNew className="z-20 h-10 w-10  text-white" />
+          </button>
+          <button
+            className="absolute right-1 top-36 z-10  scale-90 rounded-full bg-purple-500  bg-opacity-60 p-2 hover:bg-opacity-30  md:scale-100"
+            onClick={() => rightClick()}
+          >
+            <MdOutlineArrowForwardIos className="z-20 h-10 w-10 text-white" />
+          </button>
+        </div>
       </div>
     </main>
   );
 };
-
-export default LatestCarousel;
 
 // "use client";
 

@@ -1,5 +1,3 @@
-import { create } from "domain";
-import { namedQuery } from "firebase/firestore";
 
 export const trendingData = [
   {
@@ -9,6 +7,7 @@ export const trendingData = [
     title: "10 Jenis Olahraga Yang Baik dan Sehat Bagi Ibu Hamil",
     name: "nade",
     created: "24 Januari",
+    link : "/sign"
   },
   {
     id: 2,
@@ -32,7 +31,7 @@ export const trendingData = [
     created: "24 Januari",
   },
   {
-    id: 5,
+    id: 4,
     title: "10 Jenis Olahraga Yang Baik dan Sehat Bagi Ibu Hamil",
     name: "nade",
     img: "/images/olahraga.webp",

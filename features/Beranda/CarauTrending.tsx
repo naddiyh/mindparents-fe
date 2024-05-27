@@ -5,11 +5,11 @@ import TrendingCard from "@/components/Card/TrendingCard";
 import { trendingData } from "@/mock/trendingData";
 import { SubArticleButton } from "@/components/atoms";
 
-const CarauTrending = () => {
+export const CarauTrending = () => {
   const slideRef = useRef<HTMLDivElement | null>(null);
   const totalSlides = trendingData.length;
   const slideWidth = 400;
-  const speed = 1.5;
+  const speed = 1.1;
 
   useEffect(() => {
     let animationFrameId: number;
@@ -53,5 +53,3 @@ const CarauTrending = () => {
     </main>
   );
 };
-
-export default CarauTrending;

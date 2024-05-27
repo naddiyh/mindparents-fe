@@ -3,7 +3,7 @@ import React from "react";
 import { ILatestArticle } from "@/interface/latestArticle";
 import { PrimaryButton } from "../atoms";
 
-const LatestCard: React.FC<ILatestArticle> = ({ ItemArticle }) => {
+export const LatestCard: React.FC<ILatestArticle> = ({ ItemArticle }) => {
   return (
     <section className="container relative flex h-[340px] w-[350px] flex-col rounded-xl px-6 py-6 shadow-xl md:flex-row">
       <Image
@@ -32,5 +32,3 @@ const LatestCard: React.FC<ILatestArticle> = ({ ItemArticle }) => {
     </section>
   );
 };
-
-export default LatestCard;

@@ -93,7 +93,7 @@ const PageLogin = () => {
                     )}
                   </div>
                   <div className="flex flex-col gap-2 py-5">
-                    <PrimaryButton fullwidth border={false}>
+                    <PrimaryButton fullwidth>
                       <input type="submit" />
                     </PrimaryButton>
                     <div className="text-right">
