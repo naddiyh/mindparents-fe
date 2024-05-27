@@ -4,6 +4,8 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  getAuth,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 import {
@@ -16,14 +18,41 @@ import {
   where,
 } from "firebase/firestore";
 
-import { auth, db } from "@/config/firebase";
+import { db } from "@/config/firebase";
 import { TLoginForm, TSingUpForm } from "./types";
 import { IUser, TRole } from "@/interface/user";
 
 import { USER_NOT_FOUND } from "@/constant/error";
 import { FirebaseError } from "firebase/app";
+import { useEffect, useState } from "react";
+
+export const useAuthState = () => {
+  const [user, setUser] = useState<IUser | null>(null);
+  const auth = getAuth();
+
+  useEffect(() => {
+    const unregisterAuthObserver = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const docRef = doc(db, "user", user.uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const userData = docSnap.data() as IUser;
+          setUser(userData);
+        }
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unregisterAuthObserver();
+  }, []);
+
+  return user;
+};
 
 export const signup = async (value: TSingUpForm) => {
+  const auth = getAuth();
   const userCredential = await createUserWithEmailAndPassword(
     auth,
     value.email,
@@ -42,6 +71,7 @@ export const signup = async (value: TSingUpForm) => {
     topik: value.topik,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
+    password: value.password,
   };
 
   await setDoc(doc(db, "user", user.uid), user);
@@ -49,6 +79,7 @@ export const signup = async (value: TSingUpForm) => {
 };
 
 export const login = async (value: TLoginForm, role: TRole = "user") => {
+  const auth = getAuth();
   const userCredential = await signInWithEmailAndPassword(
     auth,
     value.email,
@@ -78,15 +109,17 @@ export const login = async (value: TLoginForm, role: TRole = "user") => {
 };
 
 export const logout = async () => {
+  const auth = getAuth();
   await signOut(auth);
 };
 
 export const signInWithGoogle = async () => {
+  const auth = getAuth();
   const provider = new GoogleAuthProvider();
   const userCredential = await signInWithPopup(auth, provider);
   const docRef = doc(db, "user", userCredential.user.uid);
   const docSnap = await getDoc(docRef);
-  //check if user exist in FS
+
   if (!docSnap.exists()) {
     const user: IUser = {
       uid: userCredential.user.uid,
@@ -95,6 +128,7 @@ export const signInWithGoogle = async () => {
       photoURL: userCredential.user.photoURL || "",
       emailVerified: userCredential.user.emailVerified,
       role: "user",
+      password: "",
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       parentDob: "",

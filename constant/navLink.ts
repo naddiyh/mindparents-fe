@@ -12,30 +12,44 @@ export const navlink: NavlinkProps[] = [
     title: "Beranda",
     href: "/#beranda",
   },
-  { title: "Persiapan Orang Tua", href: "/persiapan", icon: IoIosArrowDown },
-  { title: "Masa Kehamilan", href: "/", icon: IoIosArrowDown },
-  { title: "Perkembangan Anak", href: "/", icon: IoIosArrowDown },
-  { title: "Forum diskusi", href: "/" },
+  {
+    title: "Persiapan Orang Tua",
+    href: "/persiapan-orangtua",
+    icon: IoIosArrowDown,
+  },
+  { title: "Masa Kehamilan", href: "/kehamilan", icon: IoIosArrowDown },
+  {
+    title: "Perkembangan Anak",
+    href: "/perkembangan-anak",
+    icon: IoIosArrowDown,
+  },
+  { title: "Tanya Ahli", href: "/tanyaahli" },
+  { title: "Forum diskusi", href: "/forum" },
 ];
 
-export const Pregnant = [
-  { title: "Trisemester I", href: "/" },
-  { title: "Trisemester II", href: "/" },
-  { title: "Trisemester III", href: "/" },
-  { title: "Tios", href: "/" },
+export const kehamilan = [
+  { title: "Trisemester I", href: "/kehamilan/trisemester-1" },
+  { title: "Trisemester II", href: "/kehamilan/trisemester-2" },
+  { title: "Trisemester III", href: "/kehamilan/trisemester-3" },
 ];
 
-export const ChildGrow = [
-  { title: "0-1 Tahun", href: "/" },
-  { title: "1-2 Tahun", href: "/" },
-  { title: "2-6 Tahun", href: "/" },
-  { title: "6-12 Tahun", href: "/" },
-  { title: "12-18 Tahun", href: "/" },
-  { title: "Golden Age", href: "/" },
+export const perkembangan = [
+  { title: "0-1 Tahun", href: "/perkembangan-anak/0-1tahun" },
+  { title: "1-2 Tahun", href: "/perkembangan-anak/1-2tahun" },
+  { title: "2-6 Tahun", href: "/perkembangan-anak/2-6tahun" },
+  { title: "6-12 Tahun", href: "/perkembangan-anak/6-12tahun" },
+  { title: "12-18 Tahun", href: "/perkembangan-anak/12-18tahun" },
+  { title: "Golden Age", href: "/perkembangan-anak/golden-age" },
 ];
 
-export const Parents = [
-  { title: "Persiapan Mental", href: "/" },
-  { title: "Persiapan Intelektual", href: "/" },
-  { title: "Persiapan Hubungan", href: "/" },
+export const persiapanortu = [
+  { title: "Persiapan Mental", href: "/persiapan-orangtua/persiapan-mental" },
+  {
+    title: "Persiapan Intelektual",
+    href: "/persiapan-orangtua/persiapan-intelektual",
+  },
+  {
+    title: "Persiapan Hubungan",
+    href: "/persiapan-orangtua/persiapan-hubungan",
+  },
 ];

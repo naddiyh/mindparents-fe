@@ -14,7 +14,7 @@ const NavModal = ({ className, closeButton, isOpen }: NavModalProps) => {
     <>
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 border bg-black bg-opacity-40 backdrop-blur-[2px]"
+          className="fixed inset-0 z-40 min-h-screen border bg-black bg-opacity-40 backdrop-blur-sm"
           onClick={closeButton}
         ></div>
       )}
@@ -35,7 +35,9 @@ const NavModal = ({ className, closeButton, isOpen }: NavModalProps) => {
           <FaCircleUser className="text-primary-white block h-10 w-10" />
         </div>
         <Navitems />
-        <PrimaryButton fullwidth={false}>Keluar</PrimaryButton>
+        <PrimaryButton fullwidth={false} border={true}>
+          Keluar
+        </PrimaryButton>
       </section>
     </>
   );

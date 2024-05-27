@@ -24,7 +24,7 @@ export const SignUp = () => {
   const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
   return (
     <>
-      <main className="relative mx-8  items-center justify-center rounded-lg border px-6 shadow-xl lg:mx-28 lg:flex lg:min-h-screen lg:min-w-[1200px] lg:justify-between  lg:px-0">
+      <main className="relative mx-8  my-20 items-center justify-center rounded-lg border px-6 shadow-xl md:my-0 lg:mx-28 lg:flex lg:min-h-screen lg:min-w-[1200px] lg:justify-between  lg:px-0">
         <section className="relative hidden lg:flex lg:h-[955px] lg:w-[60%]">
           <Image
             src={"/images/fotoLogin.webp"}
@@ -99,12 +99,11 @@ export const SignUp = () => {
                       type="password"
                       {...register("password", {
                         required: "Password wajib diisi",
-                        pattern: {
-                          value:
-                            /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
+                        // pattern: {
+                        //   value: /min:8/,
 
-                          message: "Format kata sandi belum valid",
-                        },
+                        //   message: "Format kata sandi belum valid",
+                        // },
                       })}
                       className="h-10 w-full rounded-md border p-2 pl-4"
                     />

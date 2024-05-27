@@ -12,4 +12,5 @@ export interface IUser {
   topik: string;
   createdAt: string;
   updatedAt: string;
+  password: string;
 }
