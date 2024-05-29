@@ -14,9 +14,9 @@ body {
   overflow-x: hidden;
 }
 
-.main-root {
+/* .main-root {
   display: flex;
   overflow-y: auto;
   flex-direction: column;
   overflow-x: hidden;
-}
+} */

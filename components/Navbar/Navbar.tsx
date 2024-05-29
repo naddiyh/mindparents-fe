@@ -29,7 +29,7 @@ export const Navbar = ({ showBackground = true }) => {
   return (
     <>
       <nav
-        className={`fixed left-0 right-0 top-0 z-40 flex w-screen items-center px-6 py-2 shadow-md md:py-4 lg:px-28 ${
+        className={`sticky left-0 right-0 top-0 z-40 flex w-screen items-center px-6 py-2 shadow-md md:py-4 lg:px-28 ${
           (isScroll && showBackground) || showBackground === false
             ? "z-20 bg-primary-purple text-white opacity-95 hover:bg-primary-purple"
             : "shadow-md lg:bg-white"
