@@ -28,8 +28,8 @@ export default function TanyaAhli() {
           {Array.from({ length: 6 }).map((_, index) => (
             <DoctorCard
               imgUrl="https://th.bing.com/th/id/OIP.Pn2j5t9qBelsWydkczfK0wHaLx?rs=1&pid=ImgDetMain"
-              name="dr. Ambatron Sp.A"
-              speciality="Spesialis Ambatron"
+              name="dr. John Due Sp.A"
+              speciality="Spesialis Deadline"
               age={100}
               rating={100}
               onClickChat={() => {
@@ -49,15 +49,15 @@ export default function TanyaAhli() {
           {Array.from({ length: 6 }).map((_, index) => (
             <DoctorCard
               imgUrl="https://th.bing.com/th/id/OIP.Pn2j5t9qBelsWydkczfK0wHaLx?rs=1&pid=ImgDetMain"
-              name="dr. Ambatron Sp.A"
-              speciality="Spesialis Ambatron"
+              name="dr. John Due Sp.A"
+              speciality="Spesialis Deadline"
               age={100}
               rating={100}
               onClickChat={() => {
-                console.log("Ambatron Here");
+                router.push("/");
               }}
               onClickPromise={() => {
-                console.log("Ambatron Here");
+                router.push("/");
               }}
               key={index}
             />
@@ -73,7 +73,7 @@ export default function TanyaAhli() {
               onClick={() => {
                 router.push("/");
               }}
-              speciality="Spesialis Ambatron"
+              speciality="Spesialis Deadline"
               key={index}
             />
           ))}
