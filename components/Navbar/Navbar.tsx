@@ -6,6 +6,7 @@ import { IoMenu } from "react-icons/io5";
 import Image from "next/image";
 import Navitems from "./Navitems";
 import NavModal from "./NavModal";
+import { PrimaryButton } from "../atoms";
 
 export const Navbar = ({ showBackground = true }) => {
   const [isScroll, setIsScroll] = useState(false);
