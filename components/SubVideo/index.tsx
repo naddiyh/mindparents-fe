@@ -1,6 +1,5 @@
 import React from "react";
 import { FaVideo } from "react-icons/fa6";
-import KeluargaCemara from "@/public/images/subvideo.webp";
 export default function SubVideo() {
   return (
     <div className="pl-28">
@@ -9,7 +8,7 @@ export default function SubVideo() {
           <div className="w-full rounded-xl bg-[#0000005E] pb-[56.25%]"></div>
           <img
             className="absolute left-0 top-0 h-full w-full rounded-xl object-cover blur-[1px]"
-            src={KeluargaCemara.src}
+            src="/images/videosub.webp"
             alt="Keluarga Cemara"
           />
           <div className="absolute inset-0 flex items-center justify-center rounded-xl bg-black bg-opacity-50">
