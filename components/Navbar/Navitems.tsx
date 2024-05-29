@@ -7,15 +7,23 @@ import {
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { useAuth } from "@/features/auth/useAuth";
+import Cookies from "js-cookie"; // Import Cookies to handle user session
 
 const Navitems = () => {
   const [isScroll, setIsScroll] = useState(false);
   const [isUnderlined, setIsUnderlined] = useState<number | null>(null);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [isOpen, setIsOpen] = useState<number | null>(null); // Added state for mobile dropdown
-  const router = useRouter();
-  const pathname = usePathname();
 
+  const pathname = usePathname();
+  const { user, handleLogOut } = useAuth(); // Destructure setUser from useAuth
+  const [isLoggedIn, setIsLoggedIn] = useState(!!user); // Initialize isLoggedIn state based on user object
+
+  useEffect(() => {
+    setIsLoggedIn(!!user); // Update isLoggedIn state based on user object
+  }, [user]);
+  // Handle scrolling
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
@@ -38,8 +46,12 @@ const Navitems = () => {
     return [];
   };
 
+  useEffect(() => {
+    console.log("User changed:", user);
+  }, [user]);
+
   return (
-    <section className="z-20 flex flex-col gap-8 lg:flex-row">
+    <section className="z-20 flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-center">
       {navlink.map((item, index) => (
         <div
           key={item.href}
@@ -61,7 +73,7 @@ const Navitems = () => {
           <Link href={item.href}>
             <p
               className={`flex gap-2 pb-1 text-text-s ${
-                isScroll ? "hover: text-white" : "md:hover:text-primary-purple"
+                isScroll ? "hover:text-white" : "md:hover:text-primary-purple"
               }`}
               onClick={() => handleToggleDropdown(index)} // Added onClick event for mobile dropdown
             >
@@ -72,7 +84,7 @@ const Navitems = () => {
                     className: "inline-flex",
                     style: {
                       transform: isOpen === index ? "rotate(180deg)" : "",
-                    }, // Adjust arrow icon directly from item.icon
+                    },
                   })}
               </span>
             </p>
@@ -80,7 +92,7 @@ const Navitems = () => {
 
           {/* Mobile Dropdown Menu */}
           {isOpen === index && (
-            <div className="w-full rounded-md  pt-2  text-text-s lg:hidden">
+            <div className="w-full rounded-md pt-2 text-text-s lg:hidden">
               {getSublinks(index).map((subitem) => (
                 <Link key={subitem.href} href={subitem.href}>
                   <div className="p-3 text-white hover:bg-purple-500">
@@ -94,7 +106,7 @@ const Navitems = () => {
           {/* Underlined Animation */}
           {[0, 4, 5].includes(index) && (
             <div
-              className={`transform rounded-md border-b transition-all duration-200 ease-in md:${
+              className={`transform rounded-md border-b transition-all duration-200 ease-in ${
                 isScroll ? "border-white" : "border-primary-purple"
               }`}
               style={{
@@ -109,15 +121,15 @@ const Navitems = () => {
           {/* Dropdown Menu */}
           {hoverIndex === index && (
             <div
-              className={` absolute left-0 top-full hidden w-[200px] justify-center rounded-xl bg-white text-text-s shadow-2xl lg:flex lg:flex-col ${
-                isScroll ? " md:bg-primary-purple" : ""
+              className={`absolute left-0 top-full hidden w-[200px] justify-center rounded-xl bg-white text-text-s shadow-2xl lg:flex lg:flex-col ${
+                isScroll ? "md:bg-primary-purple" : ""
               }`}
             >
               {getSublinks(index).map((subitem) => (
                 <Link key={subitem.href} href={subitem.href}>
                   <div
-                    className={` rounded-xl  px-4 py-2 text-black hover:bg-gray-100 ${
-                      isScroll ? " text-white md:hover:bg-purple-600" : ""
+                    className={`rounded-xl px-4 py-2 text-black hover:bg-gray-100 ${
+                      isScroll ? "text-white md:hover:bg-purple-600" : ""
                     }`}
                   >
                     {subitem.title}
@@ -128,6 +140,17 @@ const Navitems = () => {
           )}
         </div>
       ))}
+
+      {isLoggedIn && (
+        <button
+          onClick={handleLogOut}
+          className={`w-fit rounded-md border px-4 py-1 text-text-s ${
+            isScroll ? "border-white" : "lg:border-primary-purple"
+          }`}
+        >
+          Keluar
+        </button>
+      )}
     </section>
   );
 };

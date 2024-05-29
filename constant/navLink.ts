@@ -14,7 +14,7 @@ export const navlink: NavlinkProps[] = [
   },
   {
     title: "Persiapan Orang Tua",
-    href: "/persiapan-orangtua",
+    href: "/persiapan-ortu",
     icon: IoIosArrowDown,
   },
   { title: "Masa Kehamilan", href: "/kehamilan", icon: IoIosArrowDown },
@@ -43,13 +43,13 @@ export const perkembangan = [
 ];
 
 export const persiapanortu = [
-  { title: "Persiapan Mental", href: "/persiapan-orangtua/persiapan-mental" },
+  { title: "Persiapan Mental", href: "/persiapan-ortu/persiapan-mental" },
   {
     title: "Persiapan Intelektual",
-    href: "/persiapan-orangtua/persiapan-intelektual",
+    href: "/persiapan-ortu/persiapan-intelektual",
   },
   {
     title: "Persiapan Hubungan",
-    href: "/persiapan-orangtua/persiapan-hubungan",
+    href: "/persiapan-ortu/persiapan-hubungan",
   },
 ];
