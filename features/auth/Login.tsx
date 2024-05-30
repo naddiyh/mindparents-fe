@@ -15,7 +15,7 @@ interface IFormInput {
   parentDob: string;
   childDob: string;
 }
-const PageLogin = () => {
+export const Login = () => {
   const { login, handleSigninWithGoogle } = useAuth();
   const {
     register,
@@ -138,5 +138,3 @@ const PageLogin = () => {
     </>
   );
 };
-
-export default PageLogin;
