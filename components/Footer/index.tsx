@@ -53,7 +53,7 @@ export default function Footer() {
               <div className="my-4 flex flex-row">
                 <input
                   type="text"
-                  placeholder="Masukkan Email Anda"
+                  placeholder="youremail@gmail.com"
                   className="w-3/4 rounded-l-lg p-2"
                 />
                 <button
