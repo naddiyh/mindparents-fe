@@ -28,7 +28,7 @@ export default function Footer() {
               parenting yang siap menambah wawasan terkait kehamilan dan
             </p>
           </div>
-          <div className="basis-1/3">
+          <div className="mx-16 basis-1/3">
             <div className="mt-10 grid grid-cols-2 gap-2">
               <p className="col-span-2 font-bold">Kategori</p>
               <p>Beranda</p>
@@ -38,7 +38,7 @@ export default function Footer() {
               <p>Persiapan Orangtua</p>
               <p>FAQ</p>
               <p>Perkembangan Anak</p>
-              <p className="col-span-2 font-bold">Informasi</p>
+              <p className="col-span-2 mt-4 font-bold">Informasi</p>
               <p>Tentang Kami</p>
               <p>Kebijakan Privasi</p>
               <p>Tim Kami</p>
