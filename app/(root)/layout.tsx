@@ -8,7 +8,7 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main>
+    <main className="main-root">
       <Navbar />
       {children}
       <script type="script/javascript">
