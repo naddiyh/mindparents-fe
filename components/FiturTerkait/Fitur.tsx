@@ -9,7 +9,7 @@ const Fitur = () => {
         <section className="flex justify-center pt-5">
           <p className="text-heading-s lg:text-heading-m text-black font-bold">Fitur Terkait</p>
         </section>
-        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 pt-10">
+        <section className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 gap-4 pt-10">
           {features.map((feature: Feature, index: number) => (
             <div 
               key={index} 
