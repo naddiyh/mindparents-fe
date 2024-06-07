@@ -1,34 +1,46 @@
+// components/Card/LatestCard.tsx
 import Image from "next/image";
 import React from "react";
-import { ILatestArticle } from "@/interface/latestArticle";
+import { IArtikel } from "@/interface";
 import { PrimaryButton } from "../atoms";
+import Link from "next/link";
 
-export const LatestCard: React.FC<ILatestArticle> = ({ ItemArticle }) => {
+interface Props {
+  article: IArtikel;
+}
+
+export const LatestCard: React.FC<Props> = ({ article }) => {
+  console.log("Rendering article:", article);
+
   return (
-    <section className="container relative flex h-[340px] w-[350px] flex-col rounded-xl px-6 py-6 shadow-xl md:flex-row">
+    <Link
+      href={`/articles/${article.subcategory}/${article.id}`}
+      passHref
+      className="container relative flex h-[340px] w-[350px] flex-col rounded-xl p-6 shadow-xl md:flex-row"
+    >
       <Image
-        src={ItemArticle.img}
+        src={article.img}
         layout="fill"
         objectFit="cover"
         alt={""}
         className=" rounded-md brightness-75 "
       />
       <div className="relative z-10  flex h-full flex-col justify-between ">
-        <PrimaryButton fullwidth={false}>{ItemArticle.title}</PrimaryButton>
+        <PrimaryButton fullwidth={false}>{article.title}</PrimaryButton>
         <div className=" flex ">
-          <p className="absolute h-[90px] border-l border-primary-purple"></p>
+          <p className="absolute bottom-0 h-[90px] border-l border-purple-200"></p>
           <div className=" flex flex-col gap-4  pl-5 text-white">
             <div className="text-text-s md:text-text-m">
-              <p>{ItemArticle.title}</p>
-              <p> {ItemArticle.desc}</p>
+              <p>{article.title}</p>
+              <p> {article.desc}</p>
             </div>
             <div className="flex w-full text-text-s ">
-              <p>{ItemArticle.name}</p>
+              <p>{article.creatorName}</p>
               <p>lo</p>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </Link>
   );
 };

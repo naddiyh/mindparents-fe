@@ -24,7 +24,7 @@ export const navlink: NavlinkProps[] = [
     icon: IoIosArrowDown,
   },
   { title: "Tanya Ahli", href: "/tanyaahli" },
-  { title: "Forum diskusi", href: "/forum" },
+  { title: "Forum Diskusi", href: "/forumdiskusi" },
 ];
 
 export const kehamilan = [

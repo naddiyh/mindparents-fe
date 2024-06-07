@@ -1,5 +1,4 @@
 import React from "react";
-import { Navbar } from "@/components/Navbar";
 import Hero from "@/components/Hero/Hero";
 
 import {
@@ -7,12 +6,14 @@ import {
   CarauRecomend,
   LatestCarousel,
 } from "@/features/Beranda";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 
 export default function Home() {
   return (
     <>
       <main>
         <Hero />
+
         <CarauTrending />
         <LatestCarousel />
         <CarauRecomend />
