@@ -8,20 +8,20 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/features/auth/useAuth";
-import Cookies from "js-cookie"; // Import Cookies to handle user session
+import Cookies from "js-cookie"; 
 
 const Navitems = () => {
   const [isScroll, setIsScroll] = useState(false);
   const [isUnderlined, setIsUnderlined] = useState<number | null>(null);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
-  const [isOpen, setIsOpen] = useState<number | null>(null); // Added state for mobile dropdown
+  const [isOpen, setIsOpen] = useState<number | null>(null); 
 
   const pathname = usePathname();
-  const { user, handleLogOut } = useAuth(); // Destructure setUser from useAuth
-  const [isLoggedIn, setIsLoggedIn] = useState(!!user); // Initialize isLoggedIn state based on user object
+  const { user, handleLogOut } = useAuth();
+  const [isLoggedIn, setIsLoggedIn] = useState(!!user); 
 
   useEffect(() => {
-    setIsLoggedIn(!!user); // Update isLoggedIn state based on user object
+    setIsLoggedIn(!!user); 
   }, [user]);
   // Handle scrolling
   useEffect(() => {
@@ -75,7 +75,7 @@ const Navitems = () => {
               className={`flex gap-2 pb-1 text-text-s ${
                 isScroll ? "hover:text-white" : "md:hover:text-primary-purple"
               }`}
-              onClick={() => handleToggleDropdown(index)} // Added onClick event for mobile dropdown
+              onClick={() => handleToggleDropdown(index)} 
             >
               {item.title}
               <span>

@@ -35,9 +35,7 @@ const NavModal = ({ className, closeButton, isOpen }: NavModalProps) => {
           <FaCircleUser className="text-primary-white block h-10 w-10" />
         </div>
         <Navitems />
-        <PrimaryButton fullwidth={false} border={true}>
-          Keluar
-        </PrimaryButton>
+       
       </section>
     </>
   );
