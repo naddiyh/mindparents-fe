@@ -1,5 +1,5 @@
 import { Navbar } from "@/components/Navbar";
-import Login from "@/features/auth/Login";
+import { Login } from "@/features/auth";
 
 export default function PageLogin() {
   return (
