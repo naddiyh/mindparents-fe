@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export const CarauRecomend = () => {
   return (
-    <main className=" flex flex-col gap-6 px-6 md:px-28">
+    <main className=" flex flex-col gap-6 px-6 pb-28 md:px-28">
       <SubArticleButton>Artikel Rekomendasi</SubArticleButton>
       <section className="flex w-full flex-1 flex-col gap-10 md:justify-between md:gap-6 lg:flex-row  ">
         <section className="grid w-fit grid-flow-row gap-3">

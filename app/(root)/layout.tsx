@@ -3,6 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { MyComponent } from "../aybubot/voiceflow";
 import Providers from "../providers";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
+import Footer from "@/components/Footer/Footer";
 
 export default function MainLayout({
   children,
@@ -17,6 +18,7 @@ export default function MainLayout({
         <script type="script/javascript">
           <MyComponent />
         </script>
+        <Footer />
       </Providers>
     </main>
   );
