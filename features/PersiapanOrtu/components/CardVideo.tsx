@@ -11,12 +11,11 @@ interface Props {
   showCount: number;
 }
 
-export const CardVideo: React.FC<Props> = ({ category, subcategory }) => {
-  const [showCount, setShowCount] = useState(3);
-  const handleShowMore = () => {
-    setShowCount((prevCount) => prevCount + 3);
-  };
-
+export const CardVideo: React.FC<Props> = ({
+  category,
+  subcategory,
+  showCount,
+}) => {
   const {
     data: articles = [],
     isLoading,
@@ -27,11 +26,11 @@ export const CardVideo: React.FC<Props> = ({ category, subcategory }) => {
   });
 
   return (
-    <section className=" grid w-full grid-flow-row justify-between gap-2 md:grid-flow-col">
+    <section className=" grid w-full grid-cols-1 justify-between gap-8 md:grid-cols-2 lg:grid-cols-3">
       {articles.slice(0, showCount).map((video: IVideo) => (
         <div className=" relative flex max-w-[300px] justify-center transition-transform duration-300 ease-in-out hover:scale-[1.02]">
           <Link
-            href={`/kehamilan/video/${video.id}`}
+            href={`/persiapan-ortu/video/${video.id}`}
             key={video.id}
             className="relative flex flex-col  "
           >

@@ -1,7 +1,6 @@
 interface PrimaryProps {
   children: React.ReactNode;
   fullwidth: boolean;
-
   onClick?: () => void;
 }
 

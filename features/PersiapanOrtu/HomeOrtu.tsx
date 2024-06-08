@@ -3,45 +3,55 @@ import { useState } from "react";
 import Card from "./components/Card";
 import { Search, ShowMore, SubArticleButton } from "@/components/atoms";
 import { IArtikel } from "@/interface";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query"; // Import useQuery
 import { getArticlesByCategoryAndSubcategory } from "@/service/artikel";
-import NewCardPage from "./components/NewCard";
 import CardVideo from "./components/CardVideo";
 
-export const HomePregnant = () => {
+export const HomeOrtu = () => {
   const [filterText, setFilterText] = useState("");
   const [showCountT1, setShowCountT1] = useState(3);
   const [showCountT2, setShowCountT2] = useState(3);
   const [showCountT3, setShowCountT3] = useState(3);
   const [showCountVid, setShowCountVid] = useState(3);
 
+  // Use useQuery to fetch articles for each trimester
   const { data: articlesT1, isLoading: loadingT1 } = useQuery({
-    queryKey: ["articles", "kehamilan", "trisemester-1"],
+    queryKey: ["articles", "persiapan-ortu", "persiapan-mental"],
     queryFn: () =>
-      getArticlesByCategoryAndSubcategory("kehamilan", "trisemester-1"),
+      getArticlesByCategoryAndSubcategory("persiapan-ortu", "persiapan-mental"),
   });
 
   const { data: articlesT2, isLoading: loadingT2 } = useQuery({
-    queryKey: ["articles", "kehamilan", "trisemester-2"],
+    queryKey: ["articles", "persiapan-ortu", "persiapan-intelektual"],
     queryFn: () =>
-      getArticlesByCategoryAndSubcategory("kehamilan", "trisemester-2"),
+      getArticlesByCategoryAndSubcategory(
+        "persiapan-ortu",
+        "persiapan-intelektual",
+      ),
   });
 
   const { data: articlesT3, isLoading: loadingT3 } = useQuery({
-    queryKey: ["articles", "kehamilan", "trisemester-3"],
+    queryKey: ["articles", "persiapan-ortu", "persiapan-hubungan"],
     queryFn: () =>
-      getArticlesByCategoryAndSubcategory("kehamilan", "trisemester-3"),
+      getArticlesByCategoryAndSubcategory(
+        "persiapan-ortu",
+        "persiapan-hubungan",
+      ),
   });
 
   const { data: video, isLoading: loadingVid } = useQuery({
-    queryKey: ["articles", "kehamilan", "video"],
-    queryFn: () => getArticlesByCategoryAndSubcategory("kehamilan", "video"),
+    queryKey: ["articles", "persiapan-ortu", "video"],
+    queryFn: () =>
+      getArticlesByCategoryAndSubcategory("persiapan-ortu", "video"),
   });
 
+  // Handle loading states
   if (loadingT1 || loadingT2 || loadingT3 || loadingVid) {
     return <div>Loading...</div>;
   }
-
+  const handleShowMoreVid = () => {
+    setShowCountVid((prevCount) => prevCount + 3);
+  };
   const handleShowMoreT1 = () => {
     setShowCountT1((prevCount) => prevCount + 3);
   };
@@ -54,9 +64,6 @@ export const HomePregnant = () => {
     setShowCountT3((prevCount) => prevCount + 3);
   };
 
-  const handleShowMoreVid = () => {
-    setShowCountVid((prevcount) => prevcount + 3);
-  };
   return (
     <main className="flex flex-col gap-10 px-6 py-28 md:px-28">
       <section>
@@ -80,7 +87,7 @@ export const HomePregnant = () => {
                 ) : (
                   <>
                     <CardVideo
-                      category={"kehamilan"}
+                      category={"persiapan-ortu"}
                       subcategory={"video"}
                       showCount={showCountVid}
                     />
@@ -103,16 +110,16 @@ export const HomePregnant = () => {
             {articlesT1 && (
               <section className="flex flex-col gap-8">
                 <p className="w-fit rounded-md border bg-primary-purple px-4 py-2 text-text-s text-white">
-                  Trisemester 1
+                  Persiapan Mental
                 </p>
                 {articlesT1.length === 0 ? (
                   <p className="italic">Maaf, artikel belum ada!</p>
                 ) : (
                   <>
                     <Card
-                      category={"kehamilan"}
-                      subcategory={"trisemester-1"}
-                      showCount={showCountT1} // Pass showCount state
+                      category={"persiapan-ortu"}
+                      subcategory={"persiapan-mental"}
+                      showCount={showCountT1}
                     />
                     <div className="flex w-full justify-end ">
                       {showCountT1 < articlesT1.length && (
@@ -129,19 +136,19 @@ export const HomePregnant = () => {
             {articlesT2 && (
               <section className="flex flex-col gap-8">
                 <p className="w-fit rounded-md border bg-primary-purple px-4 py-2 text-text-s text-white">
-                  Trisemester 2
+                  Persiapan Intelektual
                 </p>
                 {articlesT2.length === 0 ? (
                   <p className="italic">Maaf, artikel belum ada!</p>
                 ) : (
                   <>
                     <Card
-                      category={"kehamilan"}
-                      subcategory={"trisemester-2"}
+                      category={"persiapan-ortu"}
+                      subcategory={"persiapan-intelektual"}
                       showCount={showCountT2}
                     />
                     <div className="flex w-full justify-end ">
-                      {showCountT2 < articlesT2.length && (
+                      {showCountT1 < articlesT2.length && (
                         <ShowMore onClick={handleShowMoreT2}>
                           Lihat lebih banyak
                         </ShowMore>
@@ -155,19 +162,19 @@ export const HomePregnant = () => {
             {articlesT3 && (
               <section className="flex flex-col gap-8">
                 <p className="w-fit rounded-md border bg-primary-purple px-4 py-2 text-text-s text-white">
-                  Trisemester 3
+                  Persiapan Hubungan
                 </p>
                 {articlesT3.length === 0 ? (
                   <p className="italic">Maaf, artikel belum ada!</p>
                 ) : (
                   <>
                     <Card
-                      category={"kehamilan"}
-                      subcategory={"trisemester-3"}
-                      showCount={showCountT3} // Pass showCount state
+                      category={"persiapan-ortu"}
+                      subcategory={"persiapan-hubungan"}
+                      showCount={showCountT3}
                     />
                     <div className="flex w-full justify-end ">
-                      {showCountT3 < articlesT3.length && (
+                      {showCountT1 < articlesT3.length && (
                         <ShowMore onClick={handleShowMoreT3}>
                           Lihat lebih banyak
                         </ShowMore>
@@ -183,9 +190,7 @@ export const HomePregnant = () => {
           <section className="flex flex-col gap-8">
             <SubArticleButton>Artikel Terbaru</SubArticleButton>
             <section className="flex flex-col gap-2">
-              <section>
-                <NewCardPage />
-              </section>
+              <section>yyyy</section>
             </section>
           </section>
           <section className="flex flex-col gap-8">

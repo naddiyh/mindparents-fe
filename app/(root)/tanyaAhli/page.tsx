@@ -1,6 +1,6 @@
 "use client";
-import DoctorCard from "@/components/DoctorCard";
-import SpecialityCard from "@/components/SpecialityCard";
+import DoctorCard from "@/components/DoctorCard/DoctorCard";
+import SpecialityCard from "@/components/SpecialityCard/SpecialityCard";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";

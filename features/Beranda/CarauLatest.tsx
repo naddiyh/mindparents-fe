@@ -68,7 +68,7 @@ export const LatestCarousel: React.FC = () => {
 
       <div className="relative flex items-center justify-center overflow-x-hidden rounded-xl md:rounded-sm">
         <div
-          className="grid h-[600px] grid-flow-col gap-6"
+          className="grid h-[500px] grid-flow-col gap-6"
           ref={ref}
           onMouseDown={onMouseDown}
         >
