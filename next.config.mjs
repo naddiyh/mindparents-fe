@@ -9,8 +9,7 @@ const withPWA = withPWAInit({
   skipWaiting: true,
   cacheName: "my-app-cache-v1",
   cacheVersion: "1.0.0",
-  sw: "serviceWorker.js", // Assuming serviceWorker.ts is transpiled to serviceWorker.js
-
+  sw: "serviceWorker.js",
   fallbacks: {
     document: "/~offline",
     data: "/fallback.json",
@@ -24,6 +23,7 @@ const withPWA = withPWAInit({
 // Next.js configuration
 const nextConfig = {
   reactStrictMode: true,
+<<<<<<< HEAD
   // Add other Next.js configurations here if needed
   async redirects() {
     return [
@@ -52,21 +52,20 @@ const nextConfig = {
         destination: '/login',
       },
     ];
+=======
+  images: {
+    domains: ["mindparents-ffd3b.appspot.com"], // Ganti dengan domain penyimpanan Anda
+>>>>>>> 5c25709155c17e18941a86df6d35ca2de0a63d44
   },
 };
 
-// Export configuration function
 export default async (phase, { defaultConfig }) => {
-  // Check for specific build phases if necessary
-  // For example, PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD
   const isDev = phase === "phase-development-server";
   const isProd = phase === "phase-production-build";
 
-  // Apply PWA configuration only for production builds
   if (isProd) {
     return withPWA(nextConfig);
   }
 
-  // Return default or custom configuration for other phases
   return nextConfig;
 };

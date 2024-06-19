@@ -1,6 +1,16 @@
+import { RawDraftContentState } from "draft-js";
+
 export interface IArtikel {
-  id: number;
+  content: RawDraftContentState;
+
+  timestamp(timestamp: any): import("react").ReactNode;
+  subcategory: string;
+  id: string;
   title: string;
-  desc: string;
+  category: string;
   img: string;
+  desc: string;
+  createdAt: any;
+  updateAt: string;
+  creatorName: string;
 }

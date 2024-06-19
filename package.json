@@ -10,20 +10,28 @@
   },
   "dependencies": {
     "@ducanh2912/next-pwa": "^10.2.7",
+    "@nextui-org/react": "^2.4.1",
     "@tanstack/react-query": "^5.37.1",
     "@tanstack/react-query-devtools": "^5.37.1",
     "@types/uuid": "^9.0.8",
     "axios": "^1.7.2",
     "date-fns": "^3.6.0",
     "draft-js": "^0.11.7",
+<<<<<<< HEAD
+=======
+    "draft-js-export-html": "^1.4.1",
+>>>>>>> 5c25709155c17e18941a86df6d35ca2de0a63d44
     "firebase": "^10.12.1",
+    "framer-motion": "^11.2.10",
     "js-cookie": "^3.0.5",
     "next": "14.2.2",
+    "next-themes": "^0.3.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-draft-wysiwyg": "^1.15.0",
     "react-hook-form": "^7.51.5",
     "react-icons": "^5.2.1",
+    "react-router-dom": "^6.23.1",
     "react-toastify": "^10.0.5",
     "typewriter-effect": "^2.21.0",
     "use-draggable-scroll": "^0.1.0",
@@ -31,6 +39,10 @@
   },
   "devDependencies": {
     "@types/draft-js": "^0.11.18",
+<<<<<<< HEAD
+=======
+    "@tanstack/eslint-plugin-query": "^5.35.6",
+>>>>>>> 5c25709155c17e18941a86df6d35ca2de0a63d44
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20.12.12",
     "@types/react": "^18.3.2",

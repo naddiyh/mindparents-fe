@@ -1,10 +1,9 @@
 export interface ILatestArticle {
-  ItemArticle: {
-    id: number;
-    title: string;
-    desc: string;
-    name: string;
-    createdAt: any;
-    img: any;
-  };
+  id: number;
+  title: string;
+  desc: string;
+  name: string;
+  createdAt: string;
+  img: string;
+  time: string;
 }

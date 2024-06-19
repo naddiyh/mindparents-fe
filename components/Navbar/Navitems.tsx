@@ -1,27 +1,28 @@
-import {
-  navlink,
-  persiapanortu,
-  kehamilan,
-  perkembangan,
-} from "@/constant/navLink";
+// import {
+//   navlink,
+//   persiapanortu,
+//   kehamilan,
+//   perkembangan,
+// } from "@/constant/navLink";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/features/auth/useAuth";
-import Cookies from "js-cookie"; // Import Cookies to handle user session
+import Cookies from "js-cookie";
+import { navlink } from "@/constant/navLink";
 
 const Navitems = () => {
   const [isScroll, setIsScroll] = useState(false);
   const [isUnderlined, setIsUnderlined] = useState<number | null>(null);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
-  const [isOpen, setIsOpen] = useState<number | null>(null); // Added state for mobile dropdown
+  const [isOpen, setIsOpen] = useState<number | null>(null);
 
   const pathname = usePathname();
-  const { user, handleLogOut } = useAuth(); // Destructure setUser from useAuth
-  const [isLoggedIn, setIsLoggedIn] = useState(!!user); // Initialize isLoggedIn state based on user object
+  const { user, handleLogOut } = useAuth();
+  const [isLoggedIn, setIsLoggedIn] = useState(!!user);
 
   useEffect(() => {
-    setIsLoggedIn(!!user); // Update isLoggedIn state based on user object
+    setIsLoggedIn(!!user);
   }, [user]);
   // Handle scrolling
   useEffect(() => {
@@ -39,12 +40,12 @@ const Navitems = () => {
     setIsOpen(isOpen === index ? null : index);
   };
 
-  const getSublinks = (index: number) => {
-    if (index === 1) return persiapanortu;
-    if (index === 2) return kehamilan;
-    if (index === 3) return perkembangan;
-    return [];
-  };
+  // const getSublinks = (index: number) => {
+  //   if (index === 1) return persiapanortu;
+  //   if (index === 2) return kehamilan;
+  //   if (index === 3) return perkembangan;
+  //   return [];
+  // };
 
   useEffect(() => {
     console.log("User changed:", user);
@@ -75,10 +76,10 @@ const Navitems = () => {
               className={`flex gap-2 pb-1 text-text-s ${
                 isScroll ? "hover:text-white" : "md:hover:text-primary-purple"
               }`}
-              onClick={() => handleToggleDropdown(index)} // Added onClick event for mobile dropdown
+              onClick={() => handleToggleDropdown(index)}
             >
               {item.title}
-              <span>
+              {/* <span>
                 {item.icon &&
                   React.createElement(item.icon, {
                     className: "inline-flex",
@@ -86,12 +87,12 @@ const Navitems = () => {
                       transform: isOpen === index ? "rotate(180deg)" : "",
                     },
                   })}
-              </span>
+              </span> */}
             </p>
           </Link>
 
           {/* Mobile Dropdown Menu */}
-          {isOpen === index && (
+          {/* {isOpen === index && (
             <div className="w-full rounded-md pt-2 text-text-s lg:hidden">
               {getSublinks(index).map((subitem) => (
                 <Link key={subitem.href} href={subitem.href}>
@@ -101,7 +102,7 @@ const Navitems = () => {
                 </Link>
               ))}
             </div>
-          )}
+          )} */}
 
           {/* Underlined Animation */}
           {[0, 4, 5].includes(index) && (
@@ -119,7 +120,7 @@ const Navitems = () => {
           )}
 
           {/* Dropdown Menu */}
-          {hoverIndex === index && (
+          {/* {hoverIndex === index && (
             <div
               className={`absolute left-0 top-full hidden w-[200px] justify-center rounded-xl bg-white text-text-s shadow-2xl lg:flex lg:flex-col ${
                 isScroll ? "md:bg-primary-purple" : ""
@@ -137,7 +138,7 @@ const Navitems = () => {
                 </Link>
               ))}
             </div>
-          )}
+          )} */}
         </div>
       ))}
 

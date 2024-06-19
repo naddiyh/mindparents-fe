@@ -7,6 +7,7 @@ import Image from "next/image";
 import Navitems from "./Navitems";
 import NavModal from "./NavModal";
 import { PrimaryButton } from "../atoms";
+import { ThemeSwitcher } from "../ThemeSwitcher";
 
 export const Navbar = ({ showBackground = true }) => {
   const [isScroll, setIsScroll] = useState(false);
@@ -30,7 +31,7 @@ export const Navbar = ({ showBackground = true }) => {
   return (
     <>
       <nav
-        className={`fixed left-0 right-0 top-0 z-40 flex w-screen items-center px-6 py-2 shadow-md md:py-4 lg:px-28 ${
+        className={`fixed left-0 right-0 top-0 z-40 flex w-screen items-center px-6 py-2 text-black shadow-md md:py-4 lg:px-28 ${
           (isScroll && showBackground) || showBackground === false
             ? "z-20 bg-primary-purple text-white opacity-95 hover:bg-primary-purple"
             : "shadow-md lg:bg-white"
@@ -52,8 +53,9 @@ export const Navbar = ({ showBackground = true }) => {
               }`}
             />
           </button>
-          <section className="hidden lg:flex">
+          <section className="hidden gap-4 lg:flex">
             <Navitems />
+            <ThemeSwitcher />
           </section>
         </section>
       </nav>

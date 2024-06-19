@@ -2,6 +2,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
+
 const AddArticle = dynamic(() => import('@/features/admin/addArticle'), { ssr: false });
 const VideoManager = dynamic(() => import('@/features/admin/VideoManager'), { ssr: false });
 
