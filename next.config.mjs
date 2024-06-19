@@ -25,6 +25,34 @@ const withPWA = withPWAInit({
 const nextConfig = {
   reactStrictMode: true,
   // Add other Next.js configurations here if needed
+  async redirects() {
+    return [
+      {
+        source: '/admin/:path*',
+        has: [
+          {
+            type: 'cookie',
+            key: 'user',
+            value: '^(?!.*"role":"admin").*$',
+          },
+        ],
+        permanent: false,
+        destination: '/not-authorized',
+      },
+      {
+        source: '/admin/:path*',
+        has: [
+          {
+            type: 'cookie',
+            key: 'user',
+            value: '^((?!.*"role").*)$', // If user cookie does not have role
+          },
+        ],
+        permanent: false,
+        destination: '/login',
+      },
+    ];
+  },
 };
 
 // Export configuration function
