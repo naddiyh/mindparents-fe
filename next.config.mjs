@@ -23,39 +23,8 @@ const withPWA = withPWAInit({
 // Next.js configuration
 const nextConfig = {
   reactStrictMode: true,
-<<<<<<< HEAD
-  // Add other Next.js configurations here if needed
-  async redirects() {
-    return [
-      {
-        source: '/admin/:path*',
-        has: [
-          {
-            type: 'cookie',
-            key: 'user',
-            value: '^(?!.*"role":"admin").*$',
-          },
-        ],
-        permanent: false,
-        destination: '/not-authorized',
-      },
-      {
-        source: '/admin/:path*',
-        has: [
-          {
-            type: 'cookie',
-            key: 'user',
-            value: '^((?!.*"role").*)$', // If user cookie does not have role
-          },
-        ],
-        permanent: false,
-        destination: '/login',
-      },
-    ];
-=======
   images: {
     domains: ["mindparents-ffd3b.appspot.com"], // Ganti dengan domain penyimpanan Anda
->>>>>>> 5c25709155c17e18941a86df6d35ca2de0a63d44
   },
 };
 
