@@ -17,10 +17,7 @@
     "axios": "^1.7.2",
     "date-fns": "^3.6.0",
     "draft-js": "^0.11.7",
-<<<<<<< HEAD
-=======
     "draft-js-export-html": "^1.4.1",
->>>>>>> 5c25709155c17e18941a86df6d35ca2de0a63d44
     "firebase": "^10.12.1",
     "framer-motion": "^11.2.10",
     "js-cookie": "^3.0.5",
@@ -39,10 +36,7 @@
   },
   "devDependencies": {
     "@types/draft-js": "^0.11.18",
-<<<<<<< HEAD
-=======
     "@tanstack/eslint-plugin-query": "^5.35.6",
->>>>>>> 5c25709155c17e18941a86df6d35ca2de0a63d44
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20.12.12",
     "@types/react": "^18.3.2",

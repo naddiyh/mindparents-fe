@@ -4,7 +4,7 @@ import Hero from "@/components/Hero/Hero";
 import {
   CarauTrending,
   CarauRecomend,
-  LatestCarousel,
+  // LatestCarousel,
 } from "@/features/Beranda";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import SubHero from "@/components/AybuHero/SubHero";
@@ -20,7 +20,7 @@ export default function Home() {
         <SubVideo />
         <Fitur />
         <CarauTrending />
-        <LatestCarousel />
+        {/* <LatestCarousel /> */}
         <CarauRecomend />
       </main>
     </>
