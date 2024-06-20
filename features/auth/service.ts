@@ -18,10 +18,9 @@ import {
   where,
 } from "firebase/firestore";
 
-import { db } from "@/config/firebase";
+import { auth, db } from "@/config/firebase";
 import { TLoginForm, TSingUpForm } from "./types";
 import { IUser, TRole } from "@/interface/user";
-
 import { USER_NOT_FOUND } from "@/constant/error";
 import { FirebaseError } from "firebase/app";
 import { useEffect, useState } from "react";
@@ -29,7 +28,6 @@ import { useEffect, useState } from "react";
 export const useAuthState = () => {
   const [user, setUser] = useState<IUser | null>(null);
   const auth = getAuth();
-
   useEffect(() => {
     const unregisterAuthObserver = onAuthStateChanged(auth, async (user) => {
       if (user) {
@@ -52,7 +50,6 @@ export const useAuthState = () => {
 };
 
 export const signup = async (value: TSingUpForm) => {
-  const auth = getAuth();
   const userCredential = await createUserWithEmailAndPassword(
     auth,
     value.email,
@@ -79,7 +76,6 @@ export const signup = async (value: TSingUpForm) => {
 };
 
 export const login = async (value: TLoginForm, role: TRole = "user") => {
-  const auth = getAuth();
   const userCredential = await signInWithEmailAndPassword(
     auth,
     value.email,
@@ -91,30 +87,24 @@ export const login = async (value: TLoginForm, role: TRole = "user") => {
 
   if (!docSnap.exists()) {
     signOut(auth);
-    throw new FirebaseError("auth/user-not-found", USER_NOT_FOUND);
+    throw new FirebaseError("user not found", USER_NOT_FOUND);
   }
 
   if (role !== "user" && docSnap.data()?.role === "user") {
     signOut(auth);
-    throw new FirebaseError(
-      "auth/operation-not-allowed",
-      "Operation not allowed",
-    );
+    throw new FirebaseError("operation-not-allowed", "Operation not allowed");
   }
 
   const user = docSnap.data() as IUser;
   user.emailVerified = userCredential.user.emailVerified;
-
   return user;
 };
 
 export const logout = async () => {
-  const auth = getAuth();
   await signOut(auth);
 };
 
 export const signInWithGoogle = async () => {
-  const auth = getAuth();
   const provider = new GoogleAuthProvider();
   const userCredential = await signInWithPopup(auth, provider);
   const docRef = doc(db, "user", userCredential.user.uid);

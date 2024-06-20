@@ -23,7 +23,9 @@
     "js-cookie": "^3.0.5",
     "next": "14.2.2",
     "next-themes": "^0.3.0",
+    "ra-data-json-server": "^4.16.17",
     "react": "^18.3.1",
+    "react-admin": "^4.16.18",
     "react-dom": "^18.3.1",
     "react-draft-wysiwyg": "^1.15.0",
     "react-hook-form": "^7.51.5",
@@ -35,8 +37,8 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "@types/draft-js": "^0.11.18",
     "@tanstack/eslint-plugin-query": "^5.35.6",
+    "@types/draft-js": "^0.11.18",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20.12.12",
     "@types/react": "^18.3.2",

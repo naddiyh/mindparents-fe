@@ -36,8 +36,9 @@ export const useAuth = () => {
       setUser(data);
       toast.dismiss();
       toast.success("Akun Berhasil Masuk");
-      if (data.role === "admin" || data.role === "psikologi") router.push("/");
-      else router.push("/#beranda");
+      if (data.role === "admin" || data.role === "psikologi")
+        router.push("/admin");
+      else router.push("/");
     },
     onError: (error) => {
       toast.dismiss();

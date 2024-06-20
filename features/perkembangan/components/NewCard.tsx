@@ -48,7 +48,7 @@ export const NewCardPage: React.FC = () => {
   if (isError) return <div>Error loading articles</div>;
 
   return (
-    <div>
+    <div className="flex flex-col gap-6">
       {articles.slice(0, 4).map((article: IArtikel) => (
         <Link
           key={article.id}
@@ -56,9 +56,9 @@ export const NewCardPage: React.FC = () => {
           className="flex gap-4"
         >
           <Image
-            src={article.img}
+            src={article.imageUrl}
             alt={article.title}
-            width={120}
+            width={140}
             height={120}
             className="rounded-md"
           />

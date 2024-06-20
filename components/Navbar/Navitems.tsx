@@ -57,9 +57,7 @@ const Navitems = () => {
         <div
           key={item.href}
           onMouseEnter={() => {
-            if ([1, 2, 3].includes(index)) {
-              setHoverIndex(index);
-            } else if ([0, 4, 5].includes(index)) {
+            if ([0, 1, 2, 3, 4, 5].includes(index)) {
               setIsUnderlined(index);
             }
           }}
@@ -76,7 +74,7 @@ const Navitems = () => {
               className={`flex gap-2 pb-1 text-text-s ${
                 isScroll ? "hover:text-white" : "md:hover:text-primary-purple"
               }`}
-              onClick={() => handleToggleDropdown(index)}
+              // onClick={() => handleToggleDropdown(index)}
             >
               {item.title}
               {/* <span>
@@ -105,7 +103,7 @@ const Navitems = () => {
           )} */}
 
           {/* Underlined Animation */}
-          {[0, 4, 5].includes(index) && (
+          {[0, 1, 2, 3, 4, 5].includes(index) && (
             <div
               className={`transform rounded-md border-b transition-all duration-200 ease-in ${
                 isScroll ? "border-white" : "border-primary-purple"

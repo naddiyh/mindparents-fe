@@ -1,5 +1,6 @@
 import { SignUp } from "@/features/auth";
 import { Navbar } from "@/components/Navbar";
+import { AddArticle } from "@/features/Crud";
 
 export default function SignupPage() {
   return (

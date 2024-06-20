@@ -17,8 +17,8 @@ const RecomendCard: React.FC<IRecomendArticle> = ({ ItemArticle }) => {
       />
 
       <div className="z-10 ">
-        <Link href={`/pregnant/${ItemArticle.id}`} className="hover:underline">
-          <p className="font-bold">{ItemArticle.title}</p>
+        <Link href={`/pregnant/${ItemArticle.id}`} className="">
+          <p className="font-bold hover:underline">{ItemArticle.title}</p>
 
           <p className="text-text-s md:text-text-m"> {ItemArticle.desc}</p>
         </Link>

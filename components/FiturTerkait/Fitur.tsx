@@ -3,30 +3,31 @@ import Image from "next/image";
 import { features, Feature } from "./FiturObject";
 
 const Fitur = () => {
-  return(
+  return (
     <>
-      <main className="px-6 lg:px-24">
+      <main className="flex flex-col border px-28 py-10">
         <section className="flex justify-center pt-5">
-          <p className="text-heading-s lg:text-heading-m text-black font-bold">Fitur Terkait</p>
+          <p className="text-heading-s font-bold text-black lg:text-heading-m">
+            Fitur Terkait
+          </p>
         </section>
-        <section className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 gap-4 pt-10">
-          {features.map((feature: Feature, index: number) => (
-            <div 
-              key={index} 
-              className="flex flex-col sm:flex-row gap-3 items-center sm:items-start sm:gap-y-4"
-            >
-              <div className="w-full h-auto sm:w-[70px] sm:h-[50px] flex-shrink-0">
-                <Image 
-                  src={feature.src}
-                  width={100}
-                  height={70}
-                  className="rounded-xl w-full h-full object-contain object-center"
-                  alt={feature.alt}
-                />
-              </div>
-              <div>
-                <div className="lg:text-text-m sm:text-text-s font-bold">{feature.title}</div>
-                <div className="text-text-s">{feature.description}</div>
+        <section className="grid grid-cols-2 gap-4 border pt-10">
+          {features.map((feature: Feature) => (
+            <div className="flex flex-col items-center justify-center gap-4 md:flex-row">
+              <Image
+                src={feature.src}
+                width={120}
+                height={120}
+                className="rounded-xl "
+                objectFit="cover"
+                alt={feature.alt}
+              />
+
+              <div className="flex flex-col">
+                <div className="text-text-s font-bold lg:text-text-m">
+                  {feature.title}
+                </div>
+                <div className=" w-1/2 text-text-s">{feature.description}</div>
               </div>
             </div>
           ))}

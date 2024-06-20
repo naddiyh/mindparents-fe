@@ -1,5 +1,5 @@
 import { HomeOrtu } from "@/features/PersiapanOrtu";
-const perkembangan = () => {
+const Persiapan = () => {
   return <HomeOrtu />;
 };
-export default perkembangan;
+export default Persiapan;

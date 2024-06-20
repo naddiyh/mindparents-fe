@@ -1,10 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import {
-  getArticleByKehamilan,
-  getArticleByPerkembangan,
-} from "@/service/artikel";
+import { getArticleByPerkembangan } from "@/service/artikel";
 import { useMemo } from "react";
 import Image from "next/image";
 import Cookies from "js-cookie";
@@ -13,9 +10,9 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { PrimaryButton, SubArticleButton } from "../../components/atoms";
 import { FirebaseError } from "firebase/app";
-import { Timestamp } from "firebase/firestore";
 import { formatUploadTime } from "@/utils/time";
 import NewCardPage from "./components/NewCard";
+import NewVidPage from "./components/NewVid";
 
 const DetailArticle: React.FC = () => {
   const params = useParams();
@@ -37,7 +34,7 @@ const DetailArticle: React.FC = () => {
     isError: isErrorArticle,
     error,
   } = useQuery<IArtikel, FirebaseError>({
-    queryKey: ["article", subcategory, id],
+    queryKey: ["articles", subcategory, id],
     queryFn: () => getArticleByPerkembangan(subcategory, id),
   });
 
@@ -51,7 +48,7 @@ const DetailArticle: React.FC = () => {
       <div className="pt-36">Error: {error?.message || "Unknown error"}</div>
     );
   }
-  const formattedUploadTime = formatUploadTime(article.createdAt);
+  // const formattedUploadTime = formatUploadTime(article.createdAt);
 
   return (
     <main className="flex justify-between px-28 pt-32">
@@ -60,24 +57,24 @@ const DetailArticle: React.FC = () => {
         <div className="flex flex-col gap-4">
           <section className="flex gap-2">
             <Image
-              src={article.img}
-              width={60}
-              height={60}
+              src={article.imageUrl}
+              width={50}
+              height={50}
               className="rounded-full"
-              alt="author"
+              alt={article.creatorName}
             />
             <div className="flex flex-col gap-2 text-text-s">
               <p>{article.creatorName}</p>
-              <p></p>
-              {/* Display formatted upload time */}
+              {/* <p>{formattedUploadTime}</p> */}
             </div>
           </section>
           <Image
-            src={article.img}
-            width={900}
+            src={article.imageUrl}
+            width={750}
             height={100}
             alt="cover"
             objectFit="cover"
+            objectPosition="top"
           />
           <p className="text-text-s"></p>
         </div>
@@ -89,7 +86,7 @@ const DetailArticle: React.FC = () => {
           <PrimaryButton fullwidth={false}>Tinggalkan Komentar</PrimaryButton>
           <p>Komentar Button</p>
         </div>
-      </section>  
+      </section>
       <section className="flex flex-col gap-10">
         <section className="flex flex-col gap-8">
           <SubArticleButton>Artikel Terbaru</SubArticleButton>
@@ -99,7 +96,9 @@ const DetailArticle: React.FC = () => {
         </section>
         <section className="flex flex-col gap-8">
           <SubArticleButton>Video Terbaru</SubArticleButton>
-          <section>yyyy</section>
+          <section>
+            <NewVidPage />
+          </section>
         </section>
         <section>
           <SubArticleButton>Topik Lainnya</SubArticleButton>
