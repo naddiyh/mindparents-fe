@@ -227,6 +227,9 @@ const AdminPage: React.FC = () => {
             <option value="perkembangan-anak/2-6tahun">Perkembangan Anak - 2-6 Tahun</option>
             <option value="perkembangan-anak/2-18tahun">Perkembangan Anak - 2-18 Tahun</option>
             <option value="perkembangan-anak/6-12tahun">Perkembangan Anak - 6-12 Tahun</option>
+            <option value="persiapan-ortu/persiapan-hubungan">Persiapan Ortu - Persiapan Hubungan</option>
+            <option value="persiapan-ortu/persiapan-intelektual">Persiapan Ortu - Persiapan Intelektual</option>
+            <option value="persiapan-ortu/persiapan-mental">Persiapan Ortu - Persiapan Mental</option>
           </select>
         </div>
         <button
