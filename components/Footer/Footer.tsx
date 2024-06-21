@@ -7,14 +7,15 @@ import {
   FaLinkedin,
   FaXTwitter,
 } from "react-icons/fa6";
+import Image from "next/image";
 
-export default function Footer() {
+export const Footer = () => {
   return (
-    <div className="bg-[#290D4B] px-6 py-20 text-white md:px-28 md:py-28">
-      <div className="flex flex-col gap-4 md:gap-10 lg:flex-row">
+    <main className="bg-[#290D4B] px-6 py-20 text-white md:px-28 md:py-28">
+      <div className="flex flex-col gap-4 md:gap-10 lg:flex-row ">
         <div className="flex  flex-col lg:w-1/2 ">
           <div className="flex flex-row items-center">
-            <img
+            <Image
               src="/icons/mp.svg"
               alt="logo"
               width={40}
@@ -81,6 +82,6 @@ export default function Footer() {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
-}
+};
