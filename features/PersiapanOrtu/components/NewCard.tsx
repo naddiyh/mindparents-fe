@@ -54,13 +54,14 @@ export const NewCardPage: React.FC = () => {
           className="flex gap-4"
         >
           <Image
-            src={article.img}
+            src={article.imageUrl}
             alt={article.title}
             width={120}
-            height={120}
+            height={90}
             className="rounded-md"
+            objectFit="contain"
           />
-          <p className="text-text-s font-semibold hover:underline md:text-text-m">
+          <p className="text-text-s font-semibold hover:text-primary-purple hover:underline">
             {article.title}
           </p>
         </Link>

@@ -1,4 +1,4 @@
 import { HomePerkembangan } from "@/features/perkembangan";
-export default function KehamilanPage() {
+export default function PerkembanganPage() {
   return <HomePerkembangan />;
 }

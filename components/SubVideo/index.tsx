@@ -1,15 +1,19 @@
 import React from "react";
 import { FaVideo } from "react-icons/fa6";
+import Image from "next/image";
 export default function SubVideo() {
   return (
-    <div className="pl-28">
-      <div className="flex flex-row bg-[#F6F0FF]">
-        <div className="relative w-1/2">
+    <main className="flex flex-col px-6 lg:pl-20">
+      <div className="flex flex-col lg:flex-row ">
+        <div className="relative lg:w-1/2 ">
           <div className="w-full rounded-xl bg-[#0000005E] pb-[56.25%]"></div>
-          <img
+          <Image
             className="absolute left-0 top-0 h-full w-full rounded-xl object-cover blur-[1px]"
             src="/images/videosub.webp"
             alt="Keluarga Cemara"
+            height={100}
+            width={100}
+            objectFit="cover"
           />
           <div className="absolute inset-0 flex items-center justify-center rounded-xl bg-black bg-opacity-50">
             <div className="relative flex items-center justify-center">
@@ -24,7 +28,7 @@ export default function SubVideo() {
             </div>
           </div>
         </div>
-        <div className="my-8 ml-20 flex flex-col justify-center">
+        <div className="flex flex-col justify-center border bg-[#F6F0FF] p-10 lg:w-1/2">
           <p className="text-xl font-bold">
             Beragam Video Parenting yang bisa kamu dapatkan!
           </p>
@@ -41,18 +45,8 @@ export default function SubVideo() {
               <p className="font-semibold">Terkait Parenting</p>
             </div>
           </div>
-          <div className="mt-8">
-            <a
-              className="font-[600] text-primary-purple"
-              href="/"
-              target="_blank"
-              rel="noopener"
-            >
-              Lihat Video
-            </a>
-          </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

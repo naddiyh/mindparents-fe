@@ -2,11 +2,11 @@
 import { useState } from "react";
 import Card from "./components/Card";
 import { Search, ShowMore, SubArticleButton } from "@/components/atoms";
-import { IArtikel } from "@/interface";
 import { useQuery } from "@tanstack/react-query";
 import { getArticlesByCategoryAndSubcategory } from "@/service/artikel";
 import NewCardPage from "./components/NewCard";
 import CardVideo from "./components/CardVideo";
+import NewVidPage from "./components/NewVid";
 
 export const HomePregnant = () => {
   const [filterText, setFilterText] = useState("");
@@ -57,145 +57,134 @@ export const HomePregnant = () => {
   const handleShowMoreVid = () => {
     setShowCountVid((prevcount) => prevcount + 3);
   };
+
+  const filteredArticlesT1 =
+    articlesT1?.filter((article) =>
+      article.title.toLowerCase().includes(filterText.toLowerCase()),
+    ) || [];
+  const filteredArticlesT2 =
+    articlesT2?.filter((article) =>
+      article.title.toLowerCase().includes(filterText.toLowerCase()),
+    ) || [];
+  const filteredArticlesT3 =
+    articlesT3?.filter((article) =>
+      article.title.toLowerCase().includes(filterText.toLowerCase()),
+    ) || [];
+  const filteredVideos =
+    video?.filter((video) =>
+      video.title.toLowerCase().includes(filterText.toLowerCase()),
+    ) || [];
+
+  const totalFilteredArticles =
+    filteredArticlesT1.length +
+    filteredArticlesT2.length +
+    filteredArticlesT3.length;
+  const noArticlesToShow =
+    totalFilteredArticles === 0 && filteredVideos.length === 0;
+
   return (
-    <main className="flex flex-col gap-10 px-6 py-28 md:px-28">
+    <main className="flex flex-col gap-10 px-6 py-48 md:px-28">
       <section>
-        <Search
-          filterText={filterText}
-          onFilterTextChange={setFilterText}
-        ></Search>
+        <Search filterText={filterText} onFilterTextChange={setFilterText} />
       </section>
 
-      <section className="flex flex-col justify-between gap-10 md:flex-row">
-        <section className="flex flex-col gap-10 md:w-[80%] ">
-          <section className="flex flex-col gap-10">
-            <SubArticleButton>Artikel Rekomendasi</SubArticleButton>
-          </section>
-          <section className="flex flex-col gap-8">
-            <SubArticleButton>Video Terkait</SubArticleButton>
-            {video && (
-              <section className="flex flex-col gap-8">
-                {video.length === 0 ? (
-                  <p className="italic">Maaf, video belum ada!</p>
-                ) : (
-                  <>
+      <section className="flex flex-col gap-10 md:flex-row">
+        {/* Bagian Kanan (dapat di-scroll) */}
+        <div className="flex-1 ">
+          {noArticlesToShow ? (
+            <p className="italic">Maaf, artikel dan video belum ada!</p>
+          ) : (
+            <>
+              {/* Render articles for each trimester */}
+              {filteredArticlesT1.length > 0 && (
+                <section className="flex flex-col gap-10">
+                  <p className="w-fit rounded-md border bg-primary-purple px-4 py-2 text-text-s text-white">
+                    Trisemester 1
+                  </p>
+                  <Card
+                    category="kehamilan"
+                    subcategory="trisemester-1"
+                    showCount={showCountT1}
+                  />
+                  <div className="flex w-full justify-end">
+                    {showCountT1 < filteredArticlesT1.length && (
+                      <ShowMore onClick={handleShowMoreT1}>
+                        Lihat lebih banyak
+                      </ShowMore>
+                    )}
+                  </div>
+                </section>
+              )}
+              {filteredArticlesT2.length > 0 && (
+                <section className="flex flex-col gap-8">
+                  <p className="w-fit rounded-md border bg-primary-purple px-4 py-2 text-text-s text-white">
+                    Trisemester 2
+                  </p>
+                  <Card
+                    category="kehamilan"
+                    subcategory="trisemester-2"
+                    showCount={showCountT2}
+                  />
+                  <div className="flex w-full justify-end">
+                    {showCountT2 < filteredArticlesT2.length && (
+                      <ShowMore onClick={handleShowMoreT2}>
+                        Lihat lebih banyak
+                      </ShowMore>
+                    )}
+                  </div>
+                </section>
+              )}
+              {filteredArticlesT3.length > 0 && (
+                <section className="flex flex-col gap-8">
+                  <p className="w-fit rounded-md border bg-primary-purple px-4 py-2 text-text-s text-white">
+                    Trisemester 3
+                  </p>
+                  <Card
+                    category="kehamilan"
+                    subcategory="trisemester-3"
+                    showCount={showCountT3}
+                  />
+                  <div className="flex w-full justify-end">
+                    {showCountT3 < filteredArticlesT3.length && (
+                      <ShowMore onClick={handleShowMoreT3}>
+                        Lihat lebih banyak
+                      </ShowMore>
+                    )}
+                  </div>
+                </section>
+              )}
+              {filteredVideos.length > 0 && (
+                <section className="flex flex-col gap-10">
+                  <SubArticleButton>Video Terkait</SubArticleButton>
+                  <section className="flex flex-col gap-8">
                     <CardVideo
-                      category={"kehamilan"}
-                      subcategory={"video"}
+                      category="kehamilan"
+                      subcategory="video"
                       showCount={showCountVid}
                     />
-                    <div className="flex w-full justify-end ">
-                      {showCountVid < video.length && (
+                    <div className="flex w-full justify-end">
+                      {showCountVid < filteredVideos.length && (
                         <ShowMore onClick={handleShowMoreVid}>
                           Lihat lebih banyak
                         </ShowMore>
                       )}
                     </div>
-                  </>
-                )}
-              </section>
-            )}
-          </section>
-          {/* Render articles for each trimester */}
-          <section className="flex flex-col gap-10">
-            <SubArticleButton>Artikel Terkait</SubArticleButton>
-            {/* Trimester 1 */}
-            {articlesT1 && (
-              <section className="flex flex-col gap-8">
-                <p className="w-fit rounded-md border bg-primary-purple px-4 py-2 text-text-s text-white">
-                  Trisemester 1
-                </p>
-                {articlesT1.length === 0 ? (
-                  <p className="italic">Maaf, artikel belum ada!</p>
-                ) : (
-                  <>
-                    <Card
-                      category={"kehamilan"}
-                      subcategory={"trisemester-1"}
-                      showCount={showCountT1} // Pass showCount state
-                    />
-                    <div className="flex w-full justify-end ">
-                      {showCountT1 < articlesT1.length && (
-                        <ShowMore onClick={handleShowMoreT1}>
-                          Lihat lebih banyak
-                        </ShowMore>
-                      )}
-                    </div>
-                  </>
-                )}
-              </section>
-            )}
-            {/* Trimester 2 */}
-            {articlesT2 && (
-              <section className="flex flex-col gap-8">
-                <p className="w-fit rounded-md border bg-primary-purple px-4 py-2 text-text-s text-white">
-                  Trisemester 2
-                </p>
-                {articlesT2.length === 0 ? (
-                  <p className="italic">Maaf, artikel belum ada!</p>
-                ) : (
-                  <>
-                    <Card
-                      category={"kehamilan"}
-                      subcategory={"trisemester-2"}
-                      showCount={showCountT2}
-                    />
-                    <div className="flex w-full justify-end ">
-                      {showCountT2 < articlesT2.length && (
-                        <ShowMore onClick={handleShowMoreT2}>
-                          Lihat lebih banyak
-                        </ShowMore>
-                      )}
-                    </div>
-                  </>
-                )}
-              </section>
-            )}
-            {/* Trimester 3 */}
-            {articlesT3 && (
-              <section className="flex flex-col gap-8">
-                <p className="w-fit rounded-md border bg-primary-purple px-4 py-2 text-text-s text-white">
-                  Trisemester 3
-                </p>
-                {articlesT3.length === 0 ? (
-                  <p className="italic">Maaf, artikel belum ada!</p>
-                ) : (
-                  <>
-                    <Card
-                      category={"kehamilan"}
-                      subcategory={"trisemester-3"}
-                      showCount={showCountT3} // Pass showCount state
-                    />
-                    <div className="flex w-full justify-end ">
-                      {showCountT3 < articlesT3.length && (
-                        <ShowMore onClick={handleShowMoreT3}>
-                          Lihat lebih banyak
-                        </ShowMore>
-                      )}
-                    </div>
-                  </>
-                )}
-              </section>
-            )}
-          </section>
-        </section>
-        <section className="flex flex-col gap-10">
+                  </section>
+                </section>
+              )}
+            </>
+          )}
+        </div>
+        <aside className="sticky top-28 flex h-screen flex-shrink-0 flex-col gap-10 lg:w-1/4 ">
           <section className="flex flex-col gap-8">
             <SubArticleButton>Artikel Terbaru</SubArticleButton>
-            <section className="flex flex-col gap-2">
-              <section>
-                <NewCardPage />
-              </section>
-            </section>
+            <NewCardPage />
           </section>
           <section className="flex flex-col gap-8">
             <SubArticleButton>Video Terbaru</SubArticleButton>
-            <section>yyyy</section>
+            <NewVidPage />
           </section>
-          <section>
-            <SubArticleButton>Topik Lainnya</SubArticleButton>
-          </section>
-        </section>
+        </aside>
       </section>
     </main>
   );

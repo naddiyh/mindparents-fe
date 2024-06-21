@@ -12,6 +12,7 @@ import { Timestamp } from "firebase/firestore";
 import { NewCardPage } from "./components/NewCard";
 import { convertFromRaw } from "draft-js";
 import { stateToHTML } from "draft-js-export-html";
+import NewVidPage from "./components/NewVid";
 
 const DetailArticle: React.FC = () => {
   const params = useParams();
@@ -46,17 +47,20 @@ const DetailArticle: React.FC = () => {
   const formattedUploadTime = formatUploadTime(article.createdAt);
 
   // Convert the Draft.js content to HTML
-  const contentState = convertFromRaw(article.content);
-  const contentHTML = stateToHTML(contentState);
+  let contentHTML = "";
+  if (article.content) {
+    const contentState = convertFromRaw(article.content);
+    contentHTML = stateToHTML(contentState);
+  }
 
   return (
-    <main className="flex justify-between border px-28 pt-32">
-      <section className="flex w-3/4 flex-col gap-4">
+    <main className="flex px-48 pt-32 md:flex-row">
+      <section className="flex  flex-col gap-4 pr-10">
         <h1 className="text-heading-m font-bold">{article.title}</h1>
         <div className="flex flex-col gap-4">
           <section className="flex gap-2">
             <Image
-              src={article.img}
+              src={article.imageUrl}
               width={50}
               height={50}
               className="rounded-full"
@@ -68,11 +72,12 @@ const DetailArticle: React.FC = () => {
             </div>
           </section>
           <Image
-            src={article.img}
+            src={article.imageUrl}
             width={700}
             height={100}
-            alt="cover"
+            alt={article.creatorName}
             objectFit="cover"
+            className="rounded-sm"
           />
           {/* Render the HTML content */}
           <div className="" dangerouslySetInnerHTML={{ __html: contentHTML }} />
@@ -86,7 +91,7 @@ const DetailArticle: React.FC = () => {
           <p>Komentar Button</p>
         </div>
       </section>
-      <section className="flex flex-col gap-10">
+      <section className="flex  flex-col gap-10">
         <section className="flex flex-col gap-6">
           <SubArticleButton>Artikel Terbaru</SubArticleButton>
           <section className="flex flex-col gap-2">
@@ -95,7 +100,9 @@ const DetailArticle: React.FC = () => {
         </section>
         <section className="flex flex-col gap-6">
           <SubArticleButton>Video Terbaru</SubArticleButton>
-          <section className="flex flex-col  gap-2"></section>
+          <section className="flex flex-col  gap-2">
+            <NewVidPage />
+          </section>
         </section>
         <section className="flex flex-col gap-6">
           <SubArticleButton>Topik Lainnya</SubArticleButton>

@@ -1,8 +1,8 @@
 export interface Feature {
-  src : string;
-  alt : string;
-  title : string;
-  description : string;
+  src: string;
+  alt: string;
+  title: string;
+  description: string;
 }
 
 export const features: Feature[] = [
@@ -10,13 +10,15 @@ export const features: Feature[] = [
     src: "/images/anakAnak.webp",
     alt: "perkembangan Anak",
     title: "Perkembangan anak",
-    description: "Segala sesuatu tentang anak mulai dari golden age hingga masalah tentang anak",
+    description:
+      "Segala sesuatu tentang anak mulai dari golden age hingga masalah tentang anak",
   },
   {
     src: "/images/ibuHamil.webp",
     alt: "ibuHamil",
     title: "Masa Kehamilan",
-    description: "Membantu ibu hamil dalam masa kehamilan serta memberikan informasi selama masa kehamilan",
+    description:
+      "Membantu ibu hamil dalam masa kehamilan serta memberikan informasi selama masa kehamilan",
   },
   {
     src: "/images/perOrtu.webp",
@@ -34,7 +36,8 @@ export const features: Feature[] = [
     src: "/images/aybu.webp",
     alt: "Bot",
     title: "Aybu Bot",
-    description: "AI yang akan selalu siap membantu bila ada masalah yang lebih spesifik",
+    description:
+      "AI yang akan selalu siap membantu bila ada masalah yang lebih spesifik",
   },
   {
     src: "/images/Article.webp",

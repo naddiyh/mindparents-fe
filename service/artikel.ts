@@ -100,8 +100,8 @@ const fetchLatestArticles = async (
       latestArticles.push({
         id: doc.id,
         ...doc.data(),
-        category, // Tambahkan kategori ke artikel
-        subcategory, // Tambahkan subkategori ke artikel
+        category,
+        subcategory,
       } as IArtikel);
     });
   }
@@ -110,6 +110,33 @@ const fetchLatestArticles = async (
 };
 
 export default fetchLatestArticles;
+
+export const fetchLatestVideos = async (
+  category: string,
+): Promise<IVideo[]> => {
+  const latestVideos: IVideo[] = [];
+
+  const q = query(
+    collection(db, `articles/${category}/video`), // Mengambil data dari subkategori 'video'
+    orderBy("createdAt", "desc"),
+    limit(4),
+  );
+  const querySnapshot = await getDocs(q);
+
+  querySnapshot.forEach((doc) => {
+    const data = doc.data();
+    latestVideos.push({
+      id: doc.id,
+      video: data.video,
+      title: data.title,
+      duration: data.duration,
+      desc: data.desc,
+      createdAt: data.createdAt,
+    } as IVideo);
+  });
+
+  return latestVideos;
+};
 
 const getAllSubcollectionsDocs = async (
   mainCollectionNames: string[],
@@ -265,6 +292,16 @@ export const getArticleByKehamilan = async (
   }
 };
 
+export const getVideoByKehamilan = async (id: string): Promise<IVideo> => {
+  const docRef = doc(db, `articles/kehamilan/video`, id);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    return { id: docSnap.id, ...docSnap.data() } as IVideo;
+  } else {
+    throw new FirebaseError("/not-found", "Article not found");
+  }
+};
+
 export const getArticleByPerkembangan = async (
   subcategory: string,
   id: string,
@@ -278,6 +315,16 @@ export const getArticleByPerkembangan = async (
   }
 };
 
+export const getVideoByPerkembangan = async (id: string): Promise<IVideo> => {
+  const docRef = doc(db, `articles/perkembangan-anak/video`, id);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    return { id: docSnap.id, ...docSnap.data() } as IVideo;
+  } else {
+    throw new FirebaseError("/not-found", "Article not found");
+  }
+};
+
 export const getArticleByPersiapan = async (
   subcategory: string,
   id: string,
@@ -286,6 +333,16 @@ export const getArticleByPersiapan = async (
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
     return { id: docSnap.id, ...docSnap.data() } as IArtikel;
+  } else {
+    throw new FirebaseError("/not-found", "Article not found");
+  }
+};
+
+export const getVideoByPersiapan = async (id: string): Promise<IVideo> => {
+  const docRef = doc(db, `articles/persiapan-ortu/video`, id);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    return { id: docSnap.id, ...docSnap.data() } as IVideo;
   } else {
     throw new FirebaseError("/not-found", "Article not found");
   }

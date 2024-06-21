@@ -24,7 +24,10 @@ const withPWA = withPWAInit({
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["mindparents-ffd3b.appspot.com"], // Ganti dengan domain penyimpanan Anda
+    domains: [
+      "firebasestorage.googleapis.com",
+      "mindparents-ffd3b.appspot.com",
+    ],
   },
 };
 

@@ -2,8 +2,7 @@
 import { Navbar } from "@/components/Navbar";
 import { MyComponent } from "../aybubot/voiceflow";
 import Providers from "../providers";
-import { ThemeSwitcher } from "@/components/ThemeSwitcher";
-import Footer from "@/components/Footer/index";
+import Footer from "@/components/Footer";
 
 export default function MainLayout({
   children,
