@@ -15,6 +15,8 @@ const AdminPage: React.FC = () => {
   const [imageUrl, setImageUrl] = useState('');
   const [video, setVideo] = useState<File | null>(null);
   const [videoUrl, setVideoUrl] = useState('');
+  const [authorImage, setAuthorImage] = useState<File | null>(null);
+  const [authorImageUrl, setAuthorImageUrl] = useState('');
   const [path, setPath] = useState('');
   const [currentArticleId, setCurrentArticleId] = useState<string | null>(null);
 
@@ -30,15 +32,21 @@ const AdminPage: React.FC = () => {
 
   const handleVideoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      const videoFile = e.target.files[0];
-      console.log('Selected video file:', videoFile); // Debugging line
-      setVideo(videoFile);
+      setVideo(e.target.files[0]);
     }
   };
 
-  const handleUpload = (file: File | null, type: 'image' | 'video') => {
+  const handleAuthorImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setAuthorImage(e.target.files[0]);
+    }
+  };
+
+  const handleUpload = (file: File | null, type: 'image' | 'video' | 'authorImage') => {
     if (file) {
-      const storagePath = type === 'image' ? `images/${file.name}` : `videos/${file.name}`;
+      const storagePath = type === 'image' ? `images/${file.name}` 
+                      : type === 'video' ? `videos/${file.name}` 
+                      : `authorImages/${file.name}`;
       const storageRef = ref(storage, storagePath);
       const uploadTask = uploadBytesResumable(storageRef, file);
 
@@ -56,16 +64,19 @@ const AdminPage: React.FC = () => {
               if (type === 'image') {
                 setImageUrl(downloadURL);
                 alert('Image uploaded successfully!');
-              } else {
+              } else if (type === 'video') {
                 setVideoUrl(downloadURL);
                 alert('Video uploaded successfully!');
+              } else {
+                setAuthorImageUrl(downloadURL);
+                alert('Author image uploaded successfully!');
               }
             })
             .catch((error) => console.error('Error getting download URL:', error));
         }
       );
     } else {
-      alert(`Please select a ${type} to upload.`);
+      alert(`Please select a ${type === 'authorImage' ? 'author image' : type} to upload.`);
     }
   };
 
@@ -78,6 +89,7 @@ const AdminPage: React.FC = () => {
           content: convertToRaw(editorState.getCurrentContent()),
           imageUrl,
           videoUrl,
+          authorImageUrl,
           createdAt: serverTimestamp()
         };
 
@@ -87,6 +99,7 @@ const AdminPage: React.FC = () => {
         setEditorState(EditorState.createEmpty());
         setImageUrl('');
         setVideoUrl('');
+        setAuthorImageUrl('');
         alert('Artikel berhasil ditambahkan!');
         fetchArticles();
       } catch (error) {
@@ -129,6 +142,7 @@ const AdminPage: React.FC = () => {
       }
       if (imageUrl) updatedFields.imageUrl = imageUrl;
       if (videoUrl) updatedFields.videoUrl = videoUrl;
+      if (authorImageUrl) updatedFields.authorImageUrl = authorImageUrl;
 
       await updateDoc(doc(db, `articles/${path}`, articleId), updatedFields);
 
@@ -136,6 +150,7 @@ const AdminPage: React.FC = () => {
       setEditorState(EditorState.createEmpty());
       setImageUrl('');
       setVideoUrl('');
+      setAuthorImageUrl('');
       setCurrentArticleId(null);
       alert('Artikel berhasil diperbarui!');
       fetchArticles();
@@ -149,6 +164,7 @@ const AdminPage: React.FC = () => {
     setEditorState(EditorState.createWithContent(convertFromRaw(article.content)));
     setImageUrl(article.imageUrl || '');
     setVideoUrl(article.videoUrl || '');
+    setAuthorImageUrl(article.authorImageUrl || '');
     setCurrentArticleId(article.id);
   };
 
@@ -215,6 +231,21 @@ const AdminPage: React.FC = () => {
           </button>
         </div>
         <div className="mb-2">
+          <label className="block text-sm font-medium text-gray-700">Gambar Penulis</label>
+          <input
+            type="file"
+            onChange={handleAuthorImageChange}
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          />
+          <button
+            type="button"
+            onClick={() => handleUpload(authorImage, 'authorImage')}
+            className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md"
+          >
+            Upload Gambar Penulis
+          </button>
+        </div>
+        <div className="mb-2">
           <label className="block text-sm font-medium text-gray-700">Path</label>
           <select
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -254,6 +285,9 @@ const AdminPage: React.FC = () => {
                 <source src={article.videoUrl} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
+            )}
+            {article.authorImageUrl && (
+              <img src={article.authorImageUrl} alt="Author" className="mt-2 w-full h-auto rounded-full" />
             )}
             <button
               onClick={() => handleDelete(article.id)}
