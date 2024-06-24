@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import {
   collection,
@@ -24,7 +26,7 @@ interface ChatModalProps {
   psychologistName: string;
 }
 
-const ChatModal: React.FC<ChatModalProps> = ({
+export const ChatAhli: React.FC<ChatModalProps> = ({
   show,
   onHide,
   userId,
@@ -193,5 +195,3 @@ const ChatModal: React.FC<ChatModalProps> = ({
     </div>
   );
 };
-
-export default ChatModal;

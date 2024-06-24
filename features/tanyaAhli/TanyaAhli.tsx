@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "@/config/firebase";
-import CardAhli from "./CardAhli";
+import { CardAhli } from "@/features/tanyaAhli";
 import { IAhli } from "@/interface";
 
 export const TanyaAhli: React.FC = () => {

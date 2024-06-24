@@ -1,13 +1,14 @@
+"use client";
 import React, { useState } from "react";
 import { AiFillLike } from "react-icons/ai";
-import ChatModal from "./chatAhli"; // Pastikan import dari komponen ChatModal yang sudah diperbaiki
+import { ChatAhli } from "./chatAhli"; // Pastikan import dari komponen ChatModal yang sudah diperbaiki
 import { IAhli } from "@/interface"; // Pastikan import dari interface yang sesuai
 
 interface CardAhliProps {
   data: IAhli[]; // Pastikan interface IAhli sudah didefinisikan dengan benar
 }
 
-const CardAhli: React.FC<CardAhliProps> = ({ data }) => {
+export const CardAhli: React.FC<CardAhliProps> = ({ data }) => {
   const [isChatOpen, setIsChatOpen] = useState(false); // State untuk menampilkan modal chat
   const [selectedPsychologist, setSelectedPsychologist] =
     useState<IAhli | null>(null); // State untuk menyimpan psikolog yang dipilih
@@ -64,7 +65,7 @@ const CardAhli: React.FC<CardAhliProps> = ({ data }) => {
       ))}
       {/* Modal Chat */}
       {selectedPsychologist && (
-        <ChatModal
+        <ChatAhli
           show={isChatOpen}
           onHide={closeChat}
           userId="dummyUserId" // Ganti dengan userId yang sesuai, jika perlu
@@ -75,5 +76,3 @@ const CardAhli: React.FC<CardAhliProps> = ({ data }) => {
     </div>
   );
 };
-
-export default CardAhli;
