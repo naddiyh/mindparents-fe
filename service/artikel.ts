@@ -116,26 +116,34 @@ export const fetchLatestVideos = async (
 ): Promise<IVideo[]> => {
   const latestVideos: IVideo[] = [];
 
-  const q = query(
-    collection(db, `articles/${category}/video`), // Mengambil data dari subkategori 'video'
-    orderBy("createdAt", "desc"),
-    limit(4),
-  );
-  const querySnapshot = await getDocs(q);
+  try {
+    const q = query(
+      collection(db, `articles/${category}/video`),
+      orderBy("createdAt", "desc"),
+      limit(4),
+    );
 
-  querySnapshot.forEach((doc) => {
-    const data = doc.data();
-    latestVideos.push({
-      id: doc.id,
-      video: data.video,
-      title: data.title,
-      duration: data.duration,
-      desc: data.desc,
-      createdAt: data.createdAt,
-    } as IVideo);
-  });
+    const querySnapshot = await getDocs(q);
 
-  return latestVideos;
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      latestVideos.push({
+        id: doc.id,
+        videoUrl: data.videoUrl, // Adjust based on your Firestore structure
+        title: data.title,
+        duration: data.duration,
+        desc: data.desc,
+        createdAt: data.createdAt, // Assuming createdAt is a string
+        img: data.img, // Assuming img is a string
+        name: data.name, // Assuming name is a string
+      });
+    });
+
+    return latestVideos;
+  } catch (error) {
+    console.error("Error fetching latest videos:", error);
+    throw error;
+  }
 };
 
 const getAllSubcollectionsDocs = async (

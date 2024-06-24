@@ -6,7 +6,11 @@ import Image from "next/image";
 import { IArtikel } from "@/interface";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { PrimaryButton, SubArticleButton } from "../../components/atoms";
+import {
+  CommentSection,
+  PrimaryButton,
+  SubArticleButton,
+} from "../../components/atoms";
 import { FirebaseError } from "firebase/app";
 import { Timestamp } from "firebase/firestore";
 import { NewCardPage } from "./components/NewCard";
@@ -54,8 +58,8 @@ const DetailArticle: React.FC = () => {
   }
 
   return (
-    <main className="flex px-48 pt-32 md:flex-row">
-      <section className="flex  flex-col gap-4 pr-10">
+    <main className="flex px-48 pb-16 pt-32 md:flex-row">
+      <section className="flex  flex-col gap-8  pr-10">
         <h1 className="text-heading-m font-bold">{article.title}</h1>
         <div className="flex flex-col gap-4">
           <section className="flex gap-2">
@@ -88,7 +92,11 @@ const DetailArticle: React.FC = () => {
         </div>
         <div className="flex flex-col gap-4">
           <PrimaryButton fullwidth={false}>Tinggalkan Komentar</PrimaryButton>
-          <p>Komentar Button</p>
+          <CommentSection articleId={article.id} />
+        </div>
+        <div>
+          <p className="font-medium">Refrensi :</p>
+          <p>{article.references}</p>
         </div>
       </section>
       <section className="flex  flex-col gap-10">

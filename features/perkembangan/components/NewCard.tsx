@@ -60,9 +60,10 @@ export const NewCardPage: React.FC = () => {
             alt={article.title}
             width={140}
             height={120}
-            className="rounded-md"
+            className="rounded-md brightness-75"
+            objectFit="contain"
           />
-          <p className="text-text-s font-semibold hover:underline md:text-text-m">
+          <p className="text-text-s font-semibold hover:text-primary-purple hover:underline">
             {article.title}
           </p>
         </Link>

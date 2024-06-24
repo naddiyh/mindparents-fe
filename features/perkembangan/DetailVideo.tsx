@@ -39,7 +39,7 @@ const DetailVideoPage: React.FC = () => {
               title={video?.title}
               allowFullScreen
               width="100%"
-              height={470}
+              height="100%"
               className="rounded-md"
             />
             <div className="flex flex-col gap-4 text-text-s">

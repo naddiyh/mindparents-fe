@@ -14,7 +14,7 @@ export function middleware(request: NextRequest) {
 
   if (request.nextUrl.pathname.startsWith("/admin")) {
     if (!user) {
-      return NextResponse.redirect(new URL("/login", request.url));
+      return NextResponse.redirect(new URL("/login/admin", request.url));
     }
 
     if (user.role !== "admin" && user.role !== "psikologi") {

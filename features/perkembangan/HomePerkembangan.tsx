@@ -103,6 +103,7 @@ export const HomePerkembangan = () => {
     articlesT4?.filter((article) =>
       article.title.toLowerCase().includes(filterText.toLowerCase()),
     ) || [];
+
   const filteredArticlesT5 =
     articlesT5?.filter((article) =>
       article.title.toLowerCase().includes(filterText.toLowerCase()),
@@ -196,7 +197,7 @@ export const HomePerkembangan = () => {
               {filteredArticlesT4.length > 0 && (
                 <section className="flex flex-col gap-8">
                   <p className="w-fit rounded-md border bg-primary-purple px-4 py-2 text-text-s text-white">
-                    6-12 Tahun
+                    6-18 Tahun
                   </p>
                   <Card
                     category="perkembangan-anak"

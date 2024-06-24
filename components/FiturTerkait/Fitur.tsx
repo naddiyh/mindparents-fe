@@ -5,19 +5,19 @@ import { features, Feature } from "./FiturObject";
 const Fitur = () => {
   return (
     <>
-      <main className="flex flex-col border px-28 py-10">
+      <main className="flex flex-col  px-6 py-10 lg:px-28">
         <section className="flex justify-center pt-5">
           <p className="text-heading-s font-bold text-black lg:text-heading-m">
             Fitur Terkait
           </p>
         </section>
-        <section className="grid grid-cols-2 gap-4 border pt-10">
+        <section className="grid grid-cols-2 gap-4 pt-10">
           {features.map((feature: Feature) => (
-            <div className="flex flex-col items-center justify-center gap-4 md:flex-row">
+            <div className="flex flex-col gap-4 md:flex-row" key={""}>
               <Image
                 src={feature.src}
                 width={120}
-                height={120}
+                height={100}
                 className="rounded-xl "
                 objectFit="cover"
                 alt={feature.alt}

@@ -36,7 +36,7 @@ export const NewVidPage: React.FC = () => {
   if (isError) return <div>Error loading videos</div>;
 
   return (
-    <div className="flex flex-col gap-6 ">
+    <div className="flex flex-col gap-6">
       {videos.slice(0, 3).map((video: IVideo) => (
         <Link
           key={video.id}
@@ -44,19 +44,14 @@ export const NewVidPage: React.FC = () => {
           className="flex gap-4"
         >
           <iframe
-            allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            className="rounded-md "
-            allowFullScreen
             src={video.videoUrl}
-            width={140}
+            width={120}
             height={100}
+            className="rounded-md"
           />
-          <div className="flex flex-col justify-between">
-            <p className="text-text-s font-semibold hover:text-primary-purple hover:underline ">
-              {video.title}
-            </p>
-            <span className="pb-3 text-[12px]"> 20 Juni</span>
-          </div>
+          <p className="text-text-s font-semibold hover:text-primary-purple hover:underline">
+            {video.title}
+          </p>
         </Link>
       ))}
     </div>
