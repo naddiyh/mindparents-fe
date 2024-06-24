@@ -51,7 +51,7 @@ export const Card: React.FC<Props> = ({ category, subcategory }) => {
           >
             <div className="relative flex flex-col gap-3">
               <Image
-                src={artikel.img}
+                src={artikel.imageUrl}
                 width={300}
                 height={100}
                 alt={artikel.title}

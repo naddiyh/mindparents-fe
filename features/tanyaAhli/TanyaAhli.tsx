@@ -31,7 +31,7 @@ export const TanyaAhli: React.FC = () => {
   }, []);
 
   return (
-    <main className="px-28 py-40">
+    <main className="py- px-28">
       <div className="pt-6">
         <h1 className="text-2xl font-bold">Tanya Ahli</h1>
       </div>

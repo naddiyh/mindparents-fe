@@ -13,4 +13,6 @@ export interface IArtikel {
   updateAt: string;
   creatorName: string;
   video: string;
+  categor: string;
+  references: string;
 }
