@@ -38,7 +38,7 @@ export const CardVideo: React.FC<Props> = ({
           <Link
             href={`/perkembangan-anak/video/${video.id}`}
             key={video.id}
-            className="relative flex flex-col gap-3"
+            className="relative flex flex-col gap-4 "
           >
             <div className="relative">
               <iframe
@@ -59,8 +59,7 @@ export const CardVideo: React.FC<Props> = ({
                 {video.title}
               </h2>
               <p className="text-text-s">
-                {" "}
-                {truncateTextByWords(video.desc, 13)}
+                {truncateTextByWords(video.desc, 15)}
               </p>
             </div>
           </Link>

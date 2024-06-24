@@ -37,19 +37,19 @@ export const NewVidPage: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      {videos.slice(0, 4).map((video: IVideo) => (
+      {videos.slice(0, 3).map((video: IVideo) => (
         <Link
           key={video.id}
           href={`/perkembangan-anak/video/${video.id}`}
           className="flex gap-4"
         >
           <iframe
-            src={video.video}
-            width={160}
-            height={120}
+            src={video.videoUrl}
+            width={120}
+            height={100}
             className="rounded-md"
           />
-          <p className="text-text-s font-semibold hover:underline md:text-text-m">
+          <p className="text-text-s font-semibold hover:text-primary-purple hover:underline">
             {video.title}
           </p>
         </Link>

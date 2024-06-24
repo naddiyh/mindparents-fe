@@ -89,6 +89,10 @@ const DetailArticle: React.FC = () => {
           <Link href={""}>Baca Juga : </Link>
           <Link href={""}>Bagikan :</Link>
         </div>
+        <div>
+          <p className="font-medium">Refrensi :</p>
+          <p>{article.references}</p>
+        </div>
         <div className="flex flex-col gap-4">
           <PrimaryButton fullwidth={false}>Tinggalkan Komentar</PrimaryButton>
           <p>Komentar Button</p>

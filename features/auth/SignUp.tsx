@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -13,6 +14,7 @@ interface IFormInput {
   parentDob: string;
   childDob: string;
 }
+
 export const SignUp = () => {
   const { signup, handleSigninWithGoogle } = useAuth();
   const {
@@ -21,10 +23,14 @@ export const SignUp = () => {
     formState: { errors },
   } = useForm<IFormInput>();
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    localStorage.setItem("selectedTopic", data.topik); // Save selected topic to localStorage
+    signup.mutateAsync(data); // Trigger signup mutation
+  };
+
   return (
     <>
-      <main className="relative mx-8  my-20 items-center justify-center rounded-lg border px-6 shadow-xl md:my-0 lg:mx-28 lg:flex lg:min-h-screen lg:min-w-[1200px] lg:justify-between  lg:px-0">
+      <main className="relative mx-8 my-20 items-center justify-center rounded-lg border px-6 shadow-xl md:my-0 lg:mx-28 lg:flex lg:min-h-screen lg:min-w-[1200px] lg:justify-between lg:px-0">
         <section className="relative hidden lg:flex lg:h-[955px] lg:w-[60%]">
           <Image
             src={"/images/fotoLogin.webp"}
@@ -43,7 +49,7 @@ export const SignUp = () => {
           <section className="flex w-full flex-col gap-4 py-10 md:px-14">
             <section className="flex flex-col items-center gap-3 ">
               <form
-                onSubmit={handleSubmit((values) => signup.mutateAsync(values))}
+                onSubmit={handleSubmit(onSubmit)}
                 noValidate
                 className="flex w-full flex-col items-center gap-6 "
               >
@@ -99,11 +105,6 @@ export const SignUp = () => {
                       type="password"
                       {...register("password", {
                         required: "Password wajib diisi",
-                        // pattern: {
-                        //   value: /min:8/,
-
-                        //   message: "Format kata sandi belum valid",
-                        // },
                       })}
                       className="h-10 w-full rounded-md border p-2 pl-4"
                     />
