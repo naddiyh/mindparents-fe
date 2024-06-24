@@ -1,4 +1,6 @@
 export interface IAhli {
+  userId: string;
+  id: string;
   name: string;
   speciality: string;
   age: number;
