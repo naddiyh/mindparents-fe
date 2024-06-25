@@ -66,7 +66,6 @@ const DetailArticle: React.FC = () => {
 
   const formattedUploadTime = formatUploadTime(article.createdAt);
 
-  // Convert the Draft.js content to HTML
   let contentHTML = "";
   if (article.content) {
     const contentState = convertFromRaw(article.content);
@@ -74,8 +73,8 @@ const DetailArticle: React.FC = () => {
   }
 
   return (
-    <main className="flex flex-col gap-8 px-36 py-10 pt-32 md:flex-row">
-      <section className="flex w-[70%] flex-col gap-4 ">
+    <main className="flex flex-col gap-8 px-6 py-10 pt-32 md:flex-row lg:px-36">
+      <section className="flex flex-col gap-4 lg:w-[70%] ">
         <h1 className="text-heading-m font-bold">{article.title}</h1>
         <div className="flex flex-col gap-4">
           <section className="flex gap-2">
@@ -115,7 +114,7 @@ const DetailArticle: React.FC = () => {
           <p>Komentar Button</p>
         </div>
       </section>
-      <section className="flex w-[30%] flex-col gap-10">
+      <section className="flex flex-col gap-10 lg:w-[30%]">
         <section className="flex flex-col gap-6">
           <SubArticleButton>Artikel Terbaru</SubArticleButton>
           <section className="flex flex-col gap-2">
