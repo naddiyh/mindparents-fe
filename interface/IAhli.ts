@@ -1,4 +1,5 @@
 export interface IAhli {
+  imageUrl: string;
   userId: string;
   id: string;
   name: string;

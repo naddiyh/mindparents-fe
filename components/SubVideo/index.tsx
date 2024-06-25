@@ -28,7 +28,7 @@ export default function SubVideo() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col justify-center border bg-[#F6F0FF] p-10 lg:w-1/2">
+        <div className="flex flex-col justify-center bg-[#F6F0FF] p-10 lg:w-1/2">
           <p className="text-xl font-bold">
             Beragam Video Parenting yang bisa kamu dapatkan!
           </p>

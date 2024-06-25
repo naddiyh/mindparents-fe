@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { AiFillLike } from "react-icons/ai";
 import { ChatAhli } from "./chatAhli"; // Pastikan import dari komponen ChatModal yang sudah diperbaiki
 import { IAhli } from "@/interface"; // Pastikan import dari interface yang sesuai
-
+import Image from "next/image";
 interface CardAhliProps {
   data: IAhli[]; // Pastikan interface IAhli sudah didefinisikan dengan benar
 }
@@ -26,18 +26,21 @@ export const CardAhli: React.FC<CardAhliProps> = ({ data }) => {
   };
 
   return (
-    <div className="grid grid-cols-3 gap-4 ">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 ">
       {data.map((ahli, index) => (
-        <div key={index} className="rounded border-2 p-4">
-          <div className="flex flex-row">
-            <div className="w-[calc(100%-104px)] pl-4">
-              <p className="text-base font-bold">{ahli.name}</p>
-              <p className="mt-2 text-sm">{ahli.speciality}</p>
-              <div className="mt-2 flex flex-row">
-                <p className="w-full rounded bg-gray-200 p-1 text-center">
+        <div key={index} className="rounded-md border bg-white p-4 shadow-sm">
+          <div className="flex flex-row gap-6">
+            <Image src={ahli.imageUrl} width={100} height={100} alt={""} />
+            <div className="flex w-[calc(100%-104px)] flex-col gap-3 ">
+              <div>
+                <p className="text-base font-bold">{ahli.name}</p>
+                <p className=" text-text-s">{ahli.speciality}</p>
+              </div>
+              <div className=" flex flex-row gap-2 ">
+                <p className="flex w-full items-center justify-center rounded bg-gray-100  text-center text-text-s">
                   {ahli.age} Tahun
                 </p>
-                <div className="ml-4 w-full rounded bg-gray-200 p-1">
+                <div className="w-full rounded bg-gray-100 p-1">
                   <div className="flex flex-row items-center justify-center p-1">
                     <AiFillLike className="text-[#7631CC]" />
                     <div className="w-1"></div>
@@ -45,15 +48,15 @@ export const CardAhli: React.FC<CardAhliProps> = ({ data }) => {
                   </div>
                 </div>
               </div>
-              <div className="mt-2 flex flex-row">
+              <div className="flex flex-col gap-2 md:flex-row">
                 <button
-                  className="w-full rounded bg-[#7631CC] p-2 text-white"
+                  className="w-full rounded bg-[#7631CC] p-2 text-white hover:bg-purple-600"
                   onClick={() => console.log("Buat Janji clicked")} // Ubah sesuai fungsi yang diinginkan
                 >
                   Buat Janji
                 </button>
                 <button
-                  className="ml-4 w-full rounded bg-[#7631CC] p-2 text-white"
+                  className=" w-full rounded bg-[#7631CC] p-2 text-white hover:bg-purple-600"
                   onClick={() => openChat(ahli)}
                 >
                   Chat
