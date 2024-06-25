@@ -37,7 +37,7 @@ export const NewVidPage: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      {videos.slice(0, 4).map((video: IVideo) => (
+      {videos.slice(0, 3).map((video: IVideo) => (
         <Link
           key={video.id}
           href={`/persiapan-ortu/video/${video.id}`}

@@ -7,13 +7,16 @@ import { IVideo } from "@/interface";
 import { FirebaseError } from "firebase/app";
 import { useParams } from "next/navigation";
 import Image from "next/image";
+import { useLoading } from "@/context/Loading";
+import { ThreeDots } from "react-loader-spinner";
 
 const DetailVideoPage: React.FC = () => {
   const { id } = useParams();
+  const { isLoading: isGlobalLoading } = useLoading();
 
   const {
     data: video,
-    isLoading: isLoadingVideo,
+    isLoading: isVideoLoading,
     isError: isErrorVideo,
     error,
   } = useQuery<IVideo, FirebaseError>({
@@ -21,7 +24,22 @@ const DetailVideoPage: React.FC = () => {
     queryFn: () => getVideoByKehamilan(id as string),
   });
 
-  if (isLoadingVideo) return <div>Loading...</div>;
+  if (isGlobalLoading || isVideoLoading) {
+    return (
+      <div className="fixed left-0 top-0 z-50 flex h-full w-full flex-col items-center justify-center bg-black">
+        <ThreeDots
+          visible={true}
+          height="100"
+          width="100"
+          color="#7631CC"
+          radius="10"
+          ariaLabel="three-dots-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
+      </div>
+    );
+  }
   if (isErrorVideo) return <div>Error loading video</div>;
 
   return (
