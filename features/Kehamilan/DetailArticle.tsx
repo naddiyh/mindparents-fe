@@ -1,10 +1,8 @@
 "use client";
 
+import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import {
-  getArticleByKehamilan,
-  getArticleByPersiapan,
-} from "@/service/artikel";
+import { getArticleByKehamilan } from "@/service/artikel";
 import Image from "next/image";
 import { IArtikel } from "@/interface";
 import { useParams } from "next/navigation";
@@ -16,6 +14,8 @@ import { NewCardPage } from "./components/NewCard";
 import { convertFromRaw } from "draft-js";
 import { stateToHTML } from "draft-js-export-html";
 import NewVidPage from "./components/NewVid";
+import { useLoading } from "@/context/Loading";
+import { ThreeDots } from "react-loader-spinner";
 
 const DetailArticle: React.FC = () => {
   const params = useParams();
@@ -25,6 +25,8 @@ const DetailArticle: React.FC = () => {
     const date = timestamp.toDate();
     return date.toLocaleString();
   };
+
+  const { setLoading } = useLoading();
 
   const {
     data: article,
@@ -36,8 +38,23 @@ const DetailArticle: React.FC = () => {
     queryFn: () => getArticleByKehamilan(subcategory, id),
   });
 
+  useEffect(() => {
+    setLoading(isLoadingArticle);
+  }, [isLoadingArticle, setLoading]);
+
   if (isLoadingArticle) {
-    return <div>Loading...</div>;
+    return (
+      <div className="fixed left-0 top-0 z-50 flex h-full w-full flex-col items-center justify-center bg-black">
+        <ThreeDots
+          visible={true}
+          height="100"
+          width="100"
+          color="#7631CC"
+          radius="10"
+          ariaLabel="three-dots-loading"
+        />
+      </div>
+    );
   }
 
   if (isErrorArticle || !article) {
@@ -107,7 +124,7 @@ const DetailArticle: React.FC = () => {
         </section>
         <section className="flex flex-col gap-6">
           <SubArticleButton>Video Terbaru</SubArticleButton>
-          <section className="flex flex-col  gap-2">
+          <section className="flex flex-col gap-2">
             <NewVidPage />
           </section>
         </section>

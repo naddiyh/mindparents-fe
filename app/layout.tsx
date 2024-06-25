@@ -7,7 +7,7 @@ import Providers from "./providers";
 import { ToastContainer } from "react-toastify";
 import { UpButton } from "@/components/atoms";
 import "react-toastify/dist/ReactToastify.css";
-import { NextUIProvider } from "@nextui-org/react";
+import { LoadingProvider } from "@/context/Loading";
 
 const APP_NAME = "MindPar";
 const APP_DEFAULT_TITLE = "MindParents";
@@ -70,15 +70,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={OpenSans.className}>
-        <Providers>
-          {children}
-          <ReactQueryDevtools
-            initialIsOpen={false}
-            buttonPosition="bottom-left"
-          />
-        </Providers>
-        <ToastContainer />
-        <UpButton />
+        <LoadingProvider>
+          <Providers>
+            {children}
+            <ReactQueryDevtools
+              initialIsOpen={false}
+              buttonPosition="bottom-left"
+            />
+          </Providers>
+          <ToastContainer />
+          <UpButton />
+        </LoadingProvider>
       </body>
     </html>
   );
