@@ -25,7 +25,7 @@ export function ThemeSwitcher() {
 
   return (
     <div>
-      <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+      <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
         {theme === "light" ? (
           <MdLightMode
             className={`h-7 w-7 ${scrolled ? "text-white" : "text-primary-purple"}`}
