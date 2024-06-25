@@ -6,7 +6,6 @@ import { IoMenu } from "react-icons/io5";
 import Image from "next/image";
 import Navitems from "./Navitems";
 import NavModal from "./NavModal";
-import { PrimaryButton } from "../atoms";
 import { ThemeSwitcher } from "../ThemeSwitcher";
 
 export const Navbar = ({ showBackground = true }) => {

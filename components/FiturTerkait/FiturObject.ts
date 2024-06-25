@@ -3,17 +3,20 @@ export interface Feature {
   alt: string;
   title: string;
   description: string;
+  id: number;
 }
 
 export const features: Feature[] = [
   {
+    id: 1,
     src: "/images/anakAnak.webp",
     alt: "perkembangan Anak",
     title: "Perkembangan anak",
     description:
-      "Segala sesuatu tentang anak mulai dari golden age hingga masalah tentang anak",
+      "Segala sesuatu tenang masa perkembangan anak mulai dari kandungan hingga masa remaja",
   },
   {
+    id: 2,
     src: "/images/ibuHamil.webp",
     alt: "ibuHamil",
     title: "Masa Kehamilan",
@@ -21,28 +24,32 @@ export const features: Feature[] = [
       "Membantu ibu hamil dalam masa kehamilan serta memberikan informasi selama masa kehamilan",
   },
   {
+    id: 3,
     src: "/images/perOrtu.webp",
     alt: "persortu",
     title: "Persiapan Orang tua",
-    description: "Membuat orangtua lebih siap dengan adanya anak",
+    description:
+      "Mempersiapkan orang tua menjadi lebih sigap dalam berkeluarga",
   },
   {
+    id: 4,
     src: "/images/tanyaAHli.webp",
     alt: "Tanya ahli",
     title: "Tanya Ahli",
     description: "Bila ingin lebih mendalam, yuk tanya kepada ahlinya",
   },
   {
+    id: 5,
     src: "/images/aybu.webp",
     alt: "Bot",
     title: "Aybu Bot",
-    description:
-      "AI yang akan selalu siap membantu bila ada masalah yang lebih spesifik",
+    description: "Chatbot yang akan selalu siap menjawab bila ada masalah ",
   },
   {
+    id: 6,
     src: "/images/Article.webp",
     alt: "forum",
     title: "Forum Diskusi",
-    description: "Media berbagi pengalaman bersama para pengguna lainnya",
+    description: "Media berbagi pengalaman bersama para orang tua lainnya",
   },
 ];

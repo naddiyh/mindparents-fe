@@ -1,13 +1,17 @@
-// tanyaAhli.tsx
 "use client";
 import React, { useEffect, useState } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "@/config/firebase";
 import { CardAhli } from "@/features/tanyaAhli";
 import { IAhli } from "@/interface";
+import { Search } from "@/components/atoms";
 
 export const TanyaAhli: React.FC = () => {
   const [psychologists, setPsychologists] = useState<IAhli[]>([]);
+  const [filteredPsychologists, setFilteredPsychologists] = useState<IAhli[]>(
+    [],
+  );
+  const [filterText, setFilterText] = useState<string>("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,6 +20,7 @@ export const TanyaAhli: React.FC = () => {
       const data = querySnapshot.docs.map((doc) => {
         const docData = doc.data();
         return {
+          id: doc.id, // Pastikan ID dokumen ditambahkan
           name: docData.name,
           speciality: docData.speciality,
           age: docData.age,
@@ -25,28 +30,46 @@ export const TanyaAhli: React.FC = () => {
         } as IAhli;
       });
       setPsychologists(data);
+      setFilteredPsychologists(data);
     };
 
     fetchData();
   }, []);
 
+  const handleFilterTextChange = (text: string) => {
+    setFilterText(text);
+    if (text === "") {
+      setFilteredPsychologists(psychologists);
+    } else {
+      const filtered = psychologists.filter((psychologist) =>
+        psychologist.name.toLowerCase().includes(text.toLowerCase()),
+      );
+      setFilteredPsychologists(filtered);
+    }
+  };
+
   return (
-    <main className="p-28">
-      <div className="pt-6">
+    <main className="flex flex-col gap-8 px-6 py-28 lg:px-28">
+      <div>
         <h1 className="text-2xl font-bold">Tanya Ahli</h1>
       </div>
-      <div className="pt-6">
+      <div>
         <div className="relative">
-          <input
-            type="text"
-            placeholder="Cari Dokter atau Psikolog"
-            className="w-2/5 rounded-full border-2 border-gray-300 py-2 pl-10"
+          <Search
+            filterText={filterText}
+            onFilterTextChange={handleFilterTextChange}
           />
         </div>
       </div>
-      <div className="pt-6">
+      <div className="flex flex-col gap-5">
         <h2 className="text-2xl font-bold">Rekomendasi Psikolog</h2>
-        <CardAhli data={psychologists} />
+        {filteredPsychologists.length > 0 ? (
+          <CardAhli data={filteredPsychologists} />
+        ) : (
+          <p className="text-center text-text-m italic">
+            Nama tidak ditemukan!
+          </p>
+        )}
       </div>
     </main>
   );

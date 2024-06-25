@@ -161,6 +161,8 @@ const getAllSubcollectionsDocs = async (
       const subCollectionSnapshot = await getDocs(subCollectionRef);
       const subCollectionDocs = subCollectionSnapshot.docs.map((doc) => ({
         id: doc.id,
+        category: mainCollectionName, // Tambahkan ini untuk memastikan category diatur
+        subcategory: subcollection, // Tambahkan ini untuk memastikan subcategory diatur
         ...doc.data(),
       })) as IArtikel[];
       allDocs = [...allDocs, ...subCollectionDocs];

@@ -12,9 +12,9 @@ export const NewCardPage: React.FC = () => {
   const { subcategory } = params as { subcategory: string };
 
   const subcategories = [
+    "persiapan-hubungan",
     "persiapan-mental",
     "persiapan-intelektual",
-    "persiapan-hubungan",
   ];
   const [articles, setArticles] = useState<IArtikel[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -56,9 +56,9 @@ export const NewCardPage: React.FC = () => {
           <Image
             src={article.imageUrl}
             alt={article.title}
-            width={120}
-            height={90}
-            className="rounded-md"
+            width={140}
+            height={120}
+            className="rounded-md brightness-75"
             objectFit="contain"
           />
           <p className="text-text-s font-semibold hover:text-primary-purple hover:underline">

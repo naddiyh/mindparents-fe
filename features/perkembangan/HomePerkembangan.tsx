@@ -88,11 +88,12 @@ export const HomePerkembangan = () => {
 
   const filteredArticlesT1 =
     articlesT1?.filter((article) =>
-      article.title.toLowerCase().includes(filterText.toLowerCase()),
+      article.title?.toLowerCase().includes(filterText?.toLowerCase() || ""),
     ) || [];
+
   const filteredArticlesT2 =
     articlesT2?.filter((article) =>
-      article.title.toLowerCase().includes(filterText.toLowerCase()),
+      article.title?.toLowerCase().includes(filterText?.toLowerCase() || ""),
     ) || [];
   const filteredArticlesT3 =
     articlesT3?.filter((article) =>
@@ -129,7 +130,7 @@ export const HomePerkembangan = () => {
         <Search filterText={filterText} onFilterTextChange={setFilterText} />
       </section>
 
-      <section className="flex flex-col gap-10 md:flex-row">
+      <section className="flex w-full flex-col gap-10 md:flex-row">
         {/* Bagian Kanan (dapat di-scroll) */}
         <div className="flex-1 ">
           {noArticlesToShow ? (

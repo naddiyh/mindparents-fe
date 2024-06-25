@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import {
   getArticleByKehamilan,
   getArticleByPerkembangan,
+  getArticleByPersiapan,
 } from "@/service/artikel";
 import Image from "next/image";
 import { IArtikel } from "@/interface";
@@ -57,8 +58,8 @@ const DetailArticle: React.FC = () => {
   }
 
   return (
-    <main className="flex px-48 pt-32 md:flex-row">
-      <section className="flex  flex-col gap-4 pr-10">
+    <main className="flex flex-col gap-8 px-36 py-10 pt-32 md:flex-row">
+      <section className="flex w-[70%] flex-col gap-4 ">
         <h1 className="text-heading-m font-bold">{article.title}</h1>
         <div className="flex flex-col gap-4">
           <section className="flex gap-2">
@@ -76,7 +77,7 @@ const DetailArticle: React.FC = () => {
           </section>
           <Image
             src={article.imageUrl}
-            width={700}
+            width={800}
             height={100}
             alt={article.creatorName}
             objectFit="cover"
@@ -89,16 +90,16 @@ const DetailArticle: React.FC = () => {
           <Link href={""}>Baca Juga : </Link>
           <Link href={""}>Bagikan :</Link>
         </div>
-        <div className="flex flex-col gap-4">
-          <PrimaryButton fullwidth={false}>Tinggalkan Komentar</PrimaryButton>
-          <p>Komentar Button</p>
-        </div>
         <div>
           <p className="font-medium">Refrensi :</p>
           <p>{article.references}</p>
         </div>
+        <div className="flex flex-col gap-4">
+          <PrimaryButton fullwidth={false}>Tinggalkan Komentar</PrimaryButton>
+          <p>Komentar Button</p>
+        </div>
       </section>
-      <section className="flex  flex-col gap-10">
+      <section className="flex w-[30%] flex-col gap-10">
         <section className="flex flex-col gap-6">
           <SubArticleButton>Artikel Terbaru</SubArticleButton>
           <section className="flex flex-col gap-2">
@@ -110,9 +111,6 @@ const DetailArticle: React.FC = () => {
           <section className="flex flex-col  gap-2">
             <NewVidPage />
           </section>
-        </section>
-        <section className="flex flex-col gap-6">
-          <SubArticleButton>Topik Lainnya</SubArticleButton>
         </section>
       </section>
     </main>

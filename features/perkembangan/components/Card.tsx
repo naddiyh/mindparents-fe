@@ -42,24 +42,24 @@ const Card: React.FC<Props> = ({ category, subcategory, showCount }) => {
       {articles.slice(0, showCount).map((article: IArtikel) => (
         <div
           key={article.id}
-          className="flex max-w-[300px] transition-transform duration-300 ease-in-out hover:scale-[1.02]"
+          className="flex  transition-transform duration-300 ease-in-out hover:scale-[1.02]"
         >
           <Link
             href={{
               pathname: `/${category}/${subcategory}/${article.id}`,
             }}
           >
-            <div className="relative flex flex-col gap-3">
+            <div className=" flex flex-col gap-3">
               <Image
                 src={article.imageUrl}
-                width={350}
+                width={450}
                 height={100}
                 alt={article.title}
                 objectFit="cover"
                 className="rounded-md"
               />
               <div className="flex flex-col gap-1">
-                <h2 className="text-text-m font-semibold hover:underline">
+                <h2 className="text-text-m font-semibold hover:text-primary-purple hover:underline">
                   {article.title}
                 </h2>
                 <p className="text-text-s">
