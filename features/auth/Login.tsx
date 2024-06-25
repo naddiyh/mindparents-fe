@@ -7,23 +7,15 @@ import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "./useAuth";
 import { TLoginForm } from "./types";
 
-interface IFormInput {
-  topik: string;
-  name: string;
-  email: string;
-  password: string;
-  parentDob: string;
-  childDob: string;
-}
 export const Login = () => {
   const { login, handleSigninWithGoogle } = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInput>();
+  } = useForm<TLoginForm>();
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<TLoginForm> = (data) => console.log(data);
   return (
     <>
       <main className="relative mx-8 items-center justify-center rounded-lg border px-6 shadow-xl lg:mx-28 lg:flex lg:min-h-screen lg:min-w-[1080px] lg:flex-row lg:px-0">
