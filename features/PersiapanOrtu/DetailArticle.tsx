@@ -1,10 +1,8 @@
 "use client";
 
+import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import {
-  getArticleByKehamilan,
-  getArticleByPersiapan,
-} from "@/service/artikel";
+import { getArticleByPersiapan } from "@/service/artikel";
 import Image from "next/image";
 import { IArtikel } from "@/interface";
 import { useParams } from "next/navigation";
@@ -16,8 +14,11 @@ import { NewCardPage } from "./components/NewCard";
 import { convertFromRaw } from "draft-js";
 import { stateToHTML } from "draft-js-export-html";
 import NewVidPage from "./components/NewVid";
+import { ThreeDots } from "react-loader-spinner";
+import { useLoading } from "@/context/Loading";
 
 const DetailArticle: React.FC = () => {
+  const { isLoading: contextLoading } = useLoading();
   const params = useParams();
   const { subcategory, id } = params as { subcategory: string; id: string };
 
@@ -28,7 +29,7 @@ const DetailArticle: React.FC = () => {
 
   const {
     data: article,
-    isLoading: isLoadingArticle,
+    isLoading,
     isError: isErrorArticle,
     error,
   } = useQuery<IArtikel, FirebaseError>({
@@ -36,8 +37,21 @@ const DetailArticle: React.FC = () => {
     queryFn: () => getArticleByPersiapan(subcategory, id),
   });
 
-  if (isLoadingArticle) {
-    return <div>Loading...</div>;
+  if (isLoading || contextLoading) {
+    return (
+      <div className="fixed left-0 top-0 z-50 flex h-full w-full flex-col items-center justify-center bg-black">
+        <ThreeDots
+          visible={true}
+          height="100"
+          width="100"
+          color="#7631CC"
+          radius="10"
+          ariaLabel="three-dots-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
+      </div>
+    );
   }
 
   if (isErrorArticle || !article) {
@@ -83,7 +97,7 @@ const DetailArticle: React.FC = () => {
             className="rounded-sm"
           />
           {/* Render the HTML content */}
-          <div className="" dangerouslySetInnerHTML={{ __html: contentHTML }} />
+          <div dangerouslySetInnerHTML={{ __html: contentHTML }} />
         </div>
         <div className="flex justify-between">
           <Link href={""}>Baca Juga : </Link>
@@ -107,7 +121,7 @@ const DetailArticle: React.FC = () => {
         </section>
         <section className="flex flex-col gap-6">
           <SubArticleButton>Video Terbaru</SubArticleButton>
-          <section className="flex flex-col  gap-2">
+          <section className="flex flex-col gap-2">
             <NewVidPage />
           </section>
         </section>

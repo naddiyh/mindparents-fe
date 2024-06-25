@@ -6,14 +6,16 @@ import { ModalDiskusi } from "./ModalDiskusi";
 import { PrimaryButton } from "@/components/atoms";
 import { IDiskusi } from "@/interface";
 import { Card } from "./components/Card";
+import { ThreeDots } from "react-loader-spinner";
 
 export const ForumDiskusi = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [comments, setComments] = useState<IDiskusi[]>([]);
   const [replyTo, setReplyTo] = useState<IDiskusi | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleOpen = () => {
-    setIsOpen(true); // Reset replyTo when opening for a new discussion
+    setIsOpen(true);
   };
 
   const handleOpenReply = (comment: IDiskusi) => {
@@ -27,15 +29,16 @@ export const ForumDiskusi = () => {
       const commentsData: IDiskusi[] = [];
       querySnapshot.forEach((doc) => {
         const data = doc.data() as IDiskusi;
-        data.id = doc.id; // Set the id property directly on the data object
+        data.id = doc.id;
         commentsData.push(data);
       });
 
-      // Organize comments and replies
       const organizedComments = organizeComments(commentsData);
       setComments(organizedComments);
     } catch (error) {
       console.error("Error fetching comments:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -71,19 +74,36 @@ export const ForumDiskusi = () => {
     fetchComments();
   }, []);
 
+  if (isLoading) {
+    return (
+      <div className="fixed left-0 top-0 z-50 flex h-full w-full flex-col items-center justify-center bg-black">
+        <ThreeDots
+          visible={true}
+          height="100"
+          width="100"
+          color="#7631CC"
+          radius="10"
+          ariaLabel="three-dots-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
+      </div>
+    );
+  }
+
   return (
-    <main className="flex min-h-screen flex-col justify-center bg-slate-100 px-6 py-36 md:px-28 ">
+    <main className="flex min-h-screen flex-col justify-center bg-slate-100 px-6 py-36 md:px-28">
       <section className="flex flex-col justify-between gap-8 md:flex-row">
-        <div className="flex flex-col gap-4 ">
+        <div className="flex flex-col gap-4">
           <PrimaryButton fullwidth onClick={handleOpen}>
             <p>Buat Diskusi Baru</p>
           </PrimaryButton>
 
-          <div className="flex flex-col gap-2 rounded-xl  bg-white px-5 py-6">
+          <div className="flex flex-col gap-2 rounded-xl bg-white px-5 py-6">
             <h3 className="font-semibold text-primary-purple">
               Topik Spesifik
             </h3>
-            <div className="flex flex-col text-text-s  ">
+            <div className="flex flex-col text-text-s">
               <div className="flex gap-2">
                 <input type="checkbox" />
                 <label>Masa Kehamilan</label>
@@ -102,7 +122,7 @@ export const ForumDiskusi = () => {
             <h3 className="font-semibold text-primary-purple">
               Filter Diskusi
             </h3>
-            <div className="flex flex-col text-text-s  ">
+            <div className="flex flex-col text-text-s">
               <div className="flex gap-2">
                 <input type="checkbox" />
                 <label>Urutkan Terbaru</label>
@@ -114,7 +134,7 @@ export const ForumDiskusi = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-6 md:w-3/4 ">
+        <div className="flex flex-col gap-6 md:w-3/4">
           {comments.map((comment) => (
             <Card
               key={comment.id}

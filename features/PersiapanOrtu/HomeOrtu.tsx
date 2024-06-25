@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import React, { useState } from "react";
 import Card from "./components/Card";
 import { Search, ShowMore, SubArticleButton } from "@/components/atoms";
 import { useQuery } from "@tanstack/react-query";
@@ -7,8 +7,10 @@ import { getArticlesByCategoryAndSubcategory } from "@/service/artikel";
 import NewCardPage from "./components/NewCard";
 import CardVideo from "./components/CardVideo";
 import NewVidPage from "./components/NewVid";
+import { useLoading } from "@/context/Loading"; // Adjust path as necessary
+import { ThreeDots } from "react-loader-spinner";
 
-export const HomeOrtu = () => {
+export const HomeOrtu: React.FC = () => {
   const [filterText, setFilterText] = useState("");
   const [showCountT1, setShowCountT1] = useState(3);
   const [showCountT2, setShowCountT2] = useState(3);
@@ -45,8 +47,25 @@ export const HomeOrtu = () => {
       getArticlesByCategoryAndSubcategory("persiapan-ortu", "video"),
   });
 
-  if (loadingT1 || loadingT2 || loadingT3 || loadingVid) {
-    return <div>Loading...</div>;
+  const { isLoading } = useLoading(); // Use useLoading hook to manage loading state
+
+  if (isLoading || loadingT1 || loadingT2 || loadingT3 || loadingVid) {
+    return (
+      <>
+        <div className="fixed left-0 top-0 z-50 flex h-full w-full flex-col items-center justify-center  bg-black">
+          <ThreeDots
+            visible={true}
+            height="100"
+            width="100"
+            color="#7631CC"
+            radius="10"
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
+        </div>
+      </>
+    );
   }
 
   const handleShowMoreT1 = () => {
