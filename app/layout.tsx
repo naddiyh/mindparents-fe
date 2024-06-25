@@ -8,7 +8,7 @@ import { ToastContainer } from "react-toastify";
 import { UpButton } from "@/components/atoms";
 import "react-toastify/dist/ReactToastify.css";
 import { LoadingProvider } from "@/context/Loading";
-
+import { Analytics } from "@vercel/analytics/react";
 const APP_NAME = "MindPar";
 const APP_DEFAULT_TITLE = "MindParents";
 const APP_TITLE_TEMPLATE = "%s - Mental and Intelectual";
@@ -80,6 +80,7 @@ export default function RootLayout({
           </Providers>
           <ToastContainer />
           <UpButton />
+          <Analytics />
         </LoadingProvider>
       </body>
     </html>
