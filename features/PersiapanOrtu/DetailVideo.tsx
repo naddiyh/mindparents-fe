@@ -16,8 +16,10 @@ import { useLoading } from "@/context/Loading";
 import { ThreeDots } from "react-loader-spinner";
 
 const DetailVideoPage: React.FC = () => {
-  const { id } = useParams();
+  const params = useParams();
+  const id = params?.id as string | undefined;
   const { isLoading: isGlobalLoading } = useLoading();
+
   const {
     data: video,
     isLoading: isVideoLoading,
@@ -25,7 +27,8 @@ const DetailVideoPage: React.FC = () => {
     error,
   } = useQuery<IVideo, FirebaseError>({
     queryKey: ["articles", "video", id],
-    queryFn: () => getVideoByPersiapan(id as string),
+    queryFn: () => getVideoByPersiapan(id!),
+    enabled: !!id,
   });
 
   if (isGlobalLoading || isVideoLoading) {
