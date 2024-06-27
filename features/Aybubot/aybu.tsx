@@ -1,9 +1,15 @@
 // AybuBot.tsx
 "use client";
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { FaTimes } from "react-icons/fa";
+
+type AybuBotProps = {
+  isOpen: boolean; // Define isOpen as a prop
+  handleClose: () => void;
+};
 
 type Message = {
   type: string;
@@ -11,31 +17,30 @@ type Message = {
   timestamp: number;
 };
 
-type AybuBotProps = {
-  isOpen: boolean;
-  handleClose: () => void;
-};
+const DEFAULT_TIMEOUT = 30000; // 30 seconds
 
 export const AybuBot: React.FC<AybuBotProps> = ({ isOpen, handleClose }) => {
   const [prompt, setPrompt] = useState("");
-  const [response, setResponse] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
+
+    const userMessage = {
+      type: "user",
+      content: prompt,
+      timestamp: Date.now(),
+    };
+    setMessages((prevMessages) => [...prevMessages, userMessage]);
+
+    setPrompt(""); // Clear input field
 
     try {
+      setIsLoading(true);
       const res = await axios.post("/api/aybu", { prompt });
       const botResponse = res.data.completion;
-
-      const userMessage = {
-        type: "user",
-        content: prompt,
-        timestamp: Date.now(),
-      };
-      setMessages((prevMessages) => [...prevMessages, userMessage]);
 
       const botMessage = {
         type: "bot",
@@ -43,21 +48,37 @@ export const AybuBot: React.FC<AybuBotProps> = ({ isOpen, handleClose }) => {
         timestamp: Date.now(),
       };
       setMessages((prevMessages) => [...prevMessages, botMessage]);
-
-      setResponse(botResponse);
     } catch (error) {
       console.error("Error generating response:", error);
-      setResponse("Error generating response");
+      const errorMessage = {
+        type: "bot",
+        content: "Maaf, terjadi kesalahan dalam mengirim pesan.",
+        timestamp: Date.now(),
+      };
+      setMessages((prevMessages) => [...prevMessages, errorMessage]);
     } finally {
       setIsLoading(false);
     }
+  };
 
-    setPrompt("");
+  const handleTimeout = () => {
+    const defaultMessage = "Apakah ada hal lain yang ingin kamu ketahui?";
+    const botMessage = {
+      type: "bot",
+      content: defaultMessage,
+      timestamp: Date.now(),
+    };
+    setMessages((prevMessages) => [...prevMessages, botMessage]);
   };
 
   const formatTimestamp = (timestamp: number) => {
     const date = new Date(timestamp);
     return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  };
+
+  const handleCloseComponent = () => {
+    handleClose(); // Call parent component's handleClose function
+    clearTimeout(timeoutId as NodeJS.Timeout);
   };
 
   useEffect(() => {
@@ -69,6 +90,15 @@ export const AybuBot: React.FC<AybuBotProps> = ({ isOpen, handleClose }) => {
       timestamp: Date.now(),
     };
     setMessages([botMessage]);
+
+    const id = setTimeout(() => {
+      handleTimeout();
+    }, DEFAULT_TIMEOUT);
+    setTimeoutId(id);
+
+    return () => {
+      clearTimeout(id);
+    };
   }, []);
 
   if (!isOpen) return null;
@@ -87,7 +117,7 @@ export const AybuBot: React.FC<AybuBotProps> = ({ isOpen, handleClose }) => {
             />
             <p className="font-semibold">Aybu</p>
           </div>
-          <button onClick={handleClose} className="text-white">
+          <button onClick={handleCloseComponent} className="text-white">
             <FaTimes className="h-5 w-5" />
           </button>
         </div>
@@ -109,9 +139,7 @@ export const AybuBot: React.FC<AybuBotProps> = ({ isOpen, handleClose }) => {
             {messages.map((message, index) => (
               <div
                 key={index}
-                className={`flex ${
-                  message.type === "user" ? "justify-end" : "justify-start"
-                }`}
+                className={`flex ${message.type === "user" ? "justify-end" : " justify-start"}`}
               >
                 <div
                   className={`${

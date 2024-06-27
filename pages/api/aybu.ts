@@ -18,12 +18,17 @@ export default async function handler(
 
   const { prompt } = req.body;
 
+  if (!prompt) {
+    return res.status(400).json({ error: "Prompt is required" });
+  }
+
   try {
     const response = await axios.post(
-      "https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions", // Updated model endpoint
+      "https://api.openai.com/v1/chat/completions",
       {
-        prompt,
-        max_tokens: 150,
+        model: "gpt-4", // Specify the model here
+        messages: [{ role: "user", content: prompt }], // The format for Chat API
+        max_tokens: 350,
       },
       {
         headers: {
@@ -34,7 +39,7 @@ export default async function handler(
     );
 
     if (response.data.choices && response.data.choices.length > 0) {
-      const completion = response.data.choices[0].text;
+      const completion = response.data.choices[0].message.content;
       res.status(200).json({ completion });
     } else {
       res.status(200).json({ completion: "No response from OpenAI." });

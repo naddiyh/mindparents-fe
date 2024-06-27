@@ -1,8 +1,9 @@
-"use client";
+// Bot.tsx
 
+"use client";
 import { useState } from "react";
 import Image from "next/image";
-import { AybuBot } from "./aybu"; // Ensure AybuBot is correctly imported
+import { AybuBot } from "./aybu"; // Correct import statement for default export
 
 export const Bot = () => {
   const [isOpen, setIsOpen] = useState(false);
