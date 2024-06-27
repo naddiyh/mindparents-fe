@@ -23,6 +23,7 @@ const withPWA = withPWAInit({
 // Next.js configuration
 const nextConfig = {
   reactStrictMode: true,
+
   images: {
     domains: [
       "firebasestorage.googleapis.com",

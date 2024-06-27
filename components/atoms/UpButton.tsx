@@ -12,7 +12,7 @@ export const UpButton = () => {
   return (
     <main
       title="Scroll To Top"
-      className="fixed bottom-[100px] right-[26px] z-10  select-none"
+      className="z-5 fixed bottom-[100px] right-[26px]  select-none"
     >
       <button
         onClick={scrollToTop}
