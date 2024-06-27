@@ -4,7 +4,6 @@ import { NextUIProvider } from "@nextui-org/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { ReactNode, useState } from "react";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
 interface ProvidersProps {
   children: ReactNode;
 }
@@ -26,11 +25,7 @@ export default function Providers({ children }: ProvidersProps) {
 
   return (
     <NextUIProvider navigate={router.push}>
-      <NextThemesProvider attribute="class" defaultTheme="light">
-        <QueryClientProvider client={queryClient}>
-          {children}
-        </QueryClientProvider>
-      </NextThemesProvider>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </NextUIProvider>
   );
 }

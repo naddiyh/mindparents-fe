@@ -6,7 +6,6 @@ import { IoMenu } from "react-icons/io5";
 import Image from "next/image";
 import Navitems from "./Navitems";
 import NavModal from "./NavModal";
-import { ThemeSwitcher } from "../ThemeSwitcher";
 
 export const Navbar = ({ showBackground = true }) => {
   const [isScroll, setIsScroll] = useState(false);
@@ -54,7 +53,6 @@ export const Navbar = ({ showBackground = true }) => {
           </button>
           <section className="hidden gap-4 lg:flex">
             <Navitems />
-            <ThemeSwitcher />
           </section>
         </section>
       </nav>

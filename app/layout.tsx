@@ -79,7 +79,6 @@ export default function RootLayout({
             />
           </Providers>
           <ToastContainer />
-          <UpButton />
           <Analytics />
         </LoadingProvider>
       </body>
