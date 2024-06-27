@@ -1,3 +1,14 @@
+import { precacheAndRoute } from "workbox-precaching";
+
+// Array of files to precache
+precacheAndRoute(self.__WB_MANIFEST || []);
+
+// Example: Excluding specific files
+workbox.routing.registerRoute(
+  /\/fallback-font\.woff2/,
+  new workbox.strategies.NetworkOnly(),
+);
+
 if (!self.define) {
   let e,
     s = {};
