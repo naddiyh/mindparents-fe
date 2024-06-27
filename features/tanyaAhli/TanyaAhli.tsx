@@ -1,25 +1,30 @@
+// components/TanyaAhli.tsx
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/features/auth/useAuth";
+import { ThreeDots } from "react-loader-spinner";
+import { Search } from "@/components/atoms";
+import { CardAhli } from "@/features/tanyaAhli";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "@/config/firebase";
-import { CardAhli } from "@/features/tanyaAhli";
 import { IAhli } from "@/interface";
-import { Search } from "@/components/atoms";
 import { useLoading } from "@/context/Loading";
-import { TailSpin, ThreeDots } from "react-loader-spinner";
-import { useAuth } from "@/features/auth/useAuth"; // Import useAuth hook
 
 export const TanyaAhli: React.FC = () => {
-  const { user } = useAuth(); // Get user object from useAuth hook
+  const { user } = useAuth();
+  const router = useRouter();
+  const { isLoading, setLoading } = useLoading();
   const [psychologists, setPsychologists] = useState<IAhli[]>([]);
   const [filteredPsychologists, setFilteredPsychologists] = useState<
     IAhli[] | null
   >(null);
   const [filterText, setFilterText] = useState<string>("");
-  const { isLoading, setLoading } = useLoading();
 
   useEffect(() => {
     if (user) {
+      router.push("/tanyaahli");
+    } else {
       fetchData();
     }
   }, [user]);
@@ -58,8 +63,6 @@ export const TanyaAhli: React.FC = () => {
       setFilteredPsychologists(filtered);
     }
   };
-
-  // Check if useRouter is available (ensure running on client-side)
 
   if (isLoading || filteredPsychologists === null) {
     return (
