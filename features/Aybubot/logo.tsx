@@ -3,7 +3,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import { AybuBot } from "./aybu"; // Correct import statement for default export
+import { AybuBot } from "./aybu";
 
 export const Bot = () => {
   const [isOpen, setIsOpen] = useState(false);

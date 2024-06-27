@@ -1,13 +1,12 @@
 // AybuBot.tsx
 "use client";
-
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { FaTimes } from "react-icons/fa";
 
 type AybuBotProps = {
-  isOpen: boolean; // Define isOpen as a prop
+  isOpen: boolean;
   handleClose: () => void;
 };
 
@@ -24,6 +23,7 @@ export const AybuBot: React.FC<AybuBotProps> = ({ isOpen, handleClose }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
+  const [showDefaultMessage, setShowDefaultMessage] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -48,11 +48,12 @@ export const AybuBot: React.FC<AybuBotProps> = ({ isOpen, handleClose }) => {
         timestamp: Date.now(),
       };
       setMessages((prevMessages) => [...prevMessages, botMessage]);
+      setShowDefaultMessage(false); // Hide default message after bot response
     } catch (error) {
       console.error("Error generating response:", error);
       const errorMessage = {
         type: "bot",
-        content: "Maaf, terjadi kesalahan dalam mengirim pesan.",
+        content: "Maaf, saya tidak paham. Apakah bisa diulangi?",
         timestamp: Date.now(),
       };
       setMessages((prevMessages) => [...prevMessages, errorMessage]);
@@ -69,6 +70,7 @@ export const AybuBot: React.FC<AybuBotProps> = ({ isOpen, handleClose }) => {
       timestamp: Date.now(),
     };
     setMessages((prevMessages) => [...prevMessages, botMessage]);
+    setShowDefaultMessage(true); // Show default message after timeout
   };
 
   const formatTimestamp = (timestamp: number) => {

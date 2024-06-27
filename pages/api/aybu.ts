@@ -26,8 +26,8 @@ export default async function handler(
     const response = await axios.post(
       "https://api.openai.com/v1/chat/completions",
       {
-        model: "gpt-4", // Specify the model here
-        messages: [{ role: "user", content: prompt }], // The format for Chat API
+        model: "gpt-4",
+        messages: [{ role: "user", content: prompt }],
         max_tokens: 350,
       },
       {
