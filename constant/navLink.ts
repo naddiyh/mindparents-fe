@@ -23,7 +23,7 @@ export const navlink: NavlinkProps[] = [
     href: "/perkembangan-anak",
     // icon: IoIosArrowDown,
   },
-  { title: "Tanya Ahli", href: "/tanyaahli" },
+  { title: "Tanya Ahli", href: "/ahli" },
   { title: "Forum Diskusi", href: "/forumdiskusi" },
 ];
 
