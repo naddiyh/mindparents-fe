@@ -11,7 +11,8 @@ import { useLoading } from "@/context/Loading";
 import { ThreeDots } from "react-loader-spinner";
 
 const DetailVideoPage: React.FC = () => {
-  const { id } = useParams();
+  const params = useParams();
+  const id = params?.id as string | undefined;
   const { isLoading: isGlobalLoading } = useLoading();
 
   const {
@@ -21,7 +22,8 @@ const DetailVideoPage: React.FC = () => {
     error,
   } = useQuery<IVideo, FirebaseError>({
     queryKey: ["articles", "video", id],
-    queryFn: () => getVideoByKehamilan(id as string),
+    queryFn: () => getVideoByKehamilan(id!),
+    enabled: !!id,
   });
 
   if (isGlobalLoading || isVideoLoading) {
@@ -44,7 +46,7 @@ const DetailVideoPage: React.FC = () => {
 
   return (
     <>
-      <main className="flex flex-col gap-10  px-6 py-32  md:flex-row md:px-28">
+      <main className="flex flex-col gap-10 px-6 py-32 md:flex-row md:px-28">
         <section className="flex flex-col gap-6 md:w-3/4">
           <div className="flex flex-col gap-6">
             <iframe
@@ -54,14 +56,14 @@ const DetailVideoPage: React.FC = () => {
               width="100%"
               height={389}
               className="rounded-md"
-              allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             />
             <div className="flex flex-col gap-4 text-text-s">
               <h2 className="text-text-l font-bold md:text-heading-s">
                 {video?.title}
               </h2>
 
-              <div className="flex  w-full justify-between">
+              <div className="flex w-full justify-between">
                 <div className="flex gap-2">
                   {video?.img && (
                     <Image
