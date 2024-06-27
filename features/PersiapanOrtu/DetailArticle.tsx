@@ -77,7 +77,7 @@ const DetailArticle: React.FC = () => {
         <div className="flex flex-col gap-4">
           <section className="flex gap-2">
             <Image
-              src={article.imageUrl}
+              src={"/images/noprofile.webp"}
               width={50}
               height={50}
               className="rounded-full"

@@ -65,7 +65,7 @@ const DetailVideoPage: React.FC = () => {
               <div className="flex gap-2">
                 {video?.img && (
                   <Image
-                    src={video.img}
+                    src={"/images/noprofile.webp"}
                     width={50}
                     height={50}
                     objectFit="cover"
