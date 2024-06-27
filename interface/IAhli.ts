@@ -1,4 +1,5 @@
 export interface IAhli {
+  isOnline: any;
   imageUrl: string;
   userId: string;
   id: string;
@@ -9,4 +10,5 @@ export interface IAhli {
   img: string;
   onClickPromise: () => void;
   onClickChat: () => void;
+  isOline: boolean;
 }
