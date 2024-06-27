@@ -1,4 +1,3 @@
-// AybuBot.tsx
 "use client";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -49,6 +48,13 @@ export const AybuBot: React.FC<AybuBotProps> = ({ isOpen, handleClose }) => {
       };
       setMessages((prevMessages) => [...prevMessages, botMessage]);
       setShowDefaultMessage(false); // Hide default message after bot response
+
+      // Reset the timeout for the default message
+      clearTimeout(timeoutId as NodeJS.Timeout);
+      const id = setTimeout(() => {
+        handleTimeout();
+      }, DEFAULT_TIMEOUT);
+      setTimeoutId(id);
     } catch (error) {
       console.error("Error generating response:", error);
       const errorMessage = {
@@ -85,7 +91,7 @@ export const AybuBot: React.FC<AybuBotProps> = ({ isOpen, handleClose }) => {
 
   useEffect(() => {
     const initialResponse =
-      "Hello, Selamat datang di MindParents. Saya Aybu, ada yang bisa saya bantu?";
+      "Hello, Selamat datang di MindParents. Saya Aybu, ada yang bisa saya bantu?.";
     const botMessage = {
       type: "bot",
       content: initialResponse,
