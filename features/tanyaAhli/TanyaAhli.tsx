@@ -7,8 +7,10 @@ import { IAhli } from "@/interface";
 import { Search } from "@/components/atoms";
 import { useLoading } from "@/context/Loading";
 import { TailSpin, ThreeDots } from "react-loader-spinner";
+import { useAuth } from "@/features/auth/useAuth"; // Import useAuth hook
 
 export const TanyaAhli: React.FC = () => {
+  const { user } = useAuth(); // Get user object from useAuth hook
   const [psychologists, setPsychologists] = useState<IAhli[]>([]);
   const [filteredPsychologists, setFilteredPsychologists] = useState<
     IAhli[] | null
@@ -17,34 +19,33 @@ export const TanyaAhli: React.FC = () => {
   const { isLoading, setLoading } = useLoading();
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const q = query(
-          collection(db, "user"),
-          where("role", "==", "psikologi"),
-        );
-        const querySnapshot = await getDocs(q);
-        const data = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          name: doc.data().name,
-          speciality: doc.data().speciality,
-          age: doc.data().age,
-          rating: doc.data().rating,
-          onClickPromise: () => console.log("Buat Janji clicked"),
-          onClickChat: () => console.log("Chat clicked"),
-        })) as IAhli[];
-        setPsychologists(data);
-        setFilteredPsychologists(data);
-      } catch (error) {
-        console.error("Error fetching psychologists:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    if (user) {
+      fetchData();
+    }
+  }, [user]);
 
-    fetchData();
-  }, [setLoading]);
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const q = query(collection(db, "user"), where("role", "==", "psikologi"));
+      const querySnapshot = await getDocs(q);
+      const data = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        name: doc.data().name,
+        speciality: doc.data().speciality,
+        age: doc.data().age,
+        rating: doc.data().rating,
+        onClickPromise: () => console.log("Buat Janji clicked"),
+        onClickChat: () => console.log("Chat clicked"),
+      })) as IAhli[];
+      setPsychologists(data);
+      setFilteredPsychologists(data);
+    } catch (error) {
+      console.error("Error fetching psychologists:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleFilterTextChange = (text: string) => {
     setFilterText(text);
@@ -57,6 +58,8 @@ export const TanyaAhli: React.FC = () => {
       setFilteredPsychologists(filtered);
     }
   };
+
+  // Check if useRouter is available (ensure running on client-side)
 
   if (isLoading || filteredPsychologists === null) {
     return (

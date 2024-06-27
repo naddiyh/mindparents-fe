@@ -13,7 +13,7 @@ export const Search = ({ filterText, onFilterTextChange }: SearchProps) => {
       <input
         type="text"
         className="w-full rounded-md border px-4 py-1 pl-10 outline-none"
-        placeholder="Cari artikel..."
+        placeholder="Cari..."
         value={filterText}
         onChange={(e) => onFilterTextChange(e.target.value)}
       />

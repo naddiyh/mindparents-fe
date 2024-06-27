@@ -1,4 +1,4 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { IUser } from "./interface/user";
 import { cookies } from "next/headers";
 
@@ -45,4 +45,6 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
   }
+
+  return NextResponse.next(); // If no redirect conditions are met, allow next request
 }

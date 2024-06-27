@@ -33,8 +33,8 @@ export const CardAhli: React.FC<CardAhliProps> = ({ data }) => {
         <div key={index} className="rounded-md border bg-white p-4 shadow-sm">
           <div className="flex flex-row gap-6">
             <Image
-              src={ahli.imageUrl}
-              width={100}
+              src={"/images/ibudwi.webp"}
+              width={120}
               height={100}
               alt={ahli.name}
             />

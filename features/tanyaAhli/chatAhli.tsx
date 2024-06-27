@@ -53,8 +53,19 @@ export const ChatAhli: React.FC<ChatModalProps> = ({
         setPsychologists(psychologistsList);
 
         if (psychologistsList.length > 0) {
-          setActiveChat(psychologistsList[0].id);
-          fetchMessages(psychologistsList[0].id);
+          // Cari psikolog yang sedang aktif dengan pesan
+          const activePsychologist = psychologistsList.find(
+            (psychologist) => psychologist.id === activeChat,
+          );
+
+          if (!activePsychologist) {
+            // Jika tidak ada psikolog yang aktif, pilih psikolog pertama
+            setActiveChat(psychologistsList[0].id);
+            fetchMessages(psychologistsList[0].id);
+          } else {
+            // Jika ada psikolog yang aktif, tampilkan pesan untuk psikolog tersebut
+            fetchMessages(activeChat!);
+          }
         }
       } catch (error) {
         console.error("Error fetching psychologists:", error);
@@ -64,11 +75,7 @@ export const ChatAhli: React.FC<ChatModalProps> = ({
     if (show) {
       fetchPsychologists();
     }
-
-    return () => {
-      // Cleanup jika diperlukan
-    };
-  }, [show]);
+  }, [show, activeChat]); // Perubahan activeChat akan memicu pengambilan pesan baru jika sudah ada chat yang berlangsung
 
   const fetchMessages = async (psychologistId: string) => {
     if (!userId) return;
@@ -121,12 +128,9 @@ export const ChatAhli: React.FC<ChatModalProps> = ({
           timestamp: Date.now(),
         };
 
-        // Menambahkan pesan baru ke state messages hanya jika psikolog yang sedang aktif sesuai dengan psikolog yang dipilih saat ini
-        if (activeChat === psychologistId) {
-          setMessages([...messages, newMessageObj]);
-        }
-
-        setNewMessage(""); // Mengosongkan input setelah berhasil mengirim
+        // Update local state with the new message
+        setMessages((prevMessages) => [...prevMessages, newMessageObj]);
+        setNewMessage(""); // Clear the input after successfully sending
       } catch (error) {
         console.error("Error sending message:", error);
       }
@@ -136,6 +140,14 @@ export const ChatAhli: React.FC<ChatModalProps> = ({
   const formatTimestamp = (timestamp: number) => {
     const date = new Date(timestamp);
     return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  };
+
+  const handlePsychologistSelection = (psychologistId: string) => {
+    // Periksa apakah sudah ada pesan untuk psikolog yang dipilih sebelumnya
+    if (psychologistId !== activeChat) {
+      setActiveChat(psychologistId);
+      fetchMessages(psychologistId);
+    }
   };
 
   return (
@@ -162,28 +174,27 @@ export const ChatAhli: React.FC<ChatModalProps> = ({
                       ? "bg-gray-200 font-bold"
                       : ""
                   }`}
-                  onClick={() => {
-                    setActiveChat(psychologist.id);
-                    fetchMessages(psychologist.id);
-                  }}
+                  onClick={() => handlePsychologistSelection(psychologist.id)}
                 >
                   {psychologist.name}
                 </button>
               ))}
             </div>
           </div>
-          <div className="flex w-[70%] flex-col ">
-            <div className=" h-full overflow-y-auto px-4 py-2">
+          <div className="flex w-[70%] flex-col">
+            <div className="flex h-full flex-col items-end overflow-y-auto border px-4 py-2">
               {messages.map((message) => (
                 <div
                   key={message.id}
                   className={`mb-3 ${
-                    message.senderId === userId ? "text-right" : "text-left"
+                    message.senderId === userId
+                      ? "justify-end"
+                      : "justify-start"
                   }`}
                 >
-                  <p className="flex w-fit rounded-lg bg-gray-100 px-3 py-2">
-                    <p className=" pr-3">{message.text}</p>
-                    <span className="pt-3 text-[10px] text-gray-500 ">
+                  <p className="flex w-fit rounded-lg bg-primary-purple px-3 py-2">
+                    <p className="pr-3 text-white">{message.text}</p>
+                    <span className="pt-3 text-[10px] text-white">
                       {formatTimestamp(message.timestamp)}
                     </span>
                   </p>

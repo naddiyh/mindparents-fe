@@ -43,23 +43,27 @@ const Hero = () => {
             </p>
           </div>
           <div className="flex flex-col gap-4 md:flex-row md:gap-10">
-            <PrimaryButton
-              fullwidth
-              onClick={() => {
-                router.push("/signup");
-              }}
-            >
-              Daftar
-            </PrimaryButton>
+            {!isLoggedIn && (
+              <>
+                <PrimaryButton
+                  fullwidth
+                  onClick={() => {
+                    router.push("/signup");
+                  }}
+                >
+                  Daftar
+                </PrimaryButton>
 
-            <PrimaryButton
-              fullwidth
-              onClick={() => {
-                router.push("/login");
-              }}
-            >
-              Masuk
-            </PrimaryButton>
+                <PrimaryButton
+                  fullwidth
+                  onClick={() => {
+                    router.push("/login");
+                  }}
+                >
+                  Masuk
+                </PrimaryButton>
+              </>
+            )}
           </div>
         </section>
       </section>
