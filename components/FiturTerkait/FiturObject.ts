@@ -33,7 +33,7 @@ export const features: Feature[] = [
   },
   {
     id: 4,
-    src: "/images/tanyaAHli.webp",
+    src: "/images/tanyaahli.webp",
     alt: "Tanya ahli",
     title: "Tanya Ahli",
     description: "Bila ingin lebih mendalam, yuk tanya kepada ahlinya",
