@@ -1,56 +1,50 @@
-// components/TanyaAhli.tsx
 "use client";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { useAuth } from "@/features/auth/useAuth";
-import { ThreeDots } from "react-loader-spinner";
-import { Search } from "@/components/atoms";
-import { CardAhli } from "@/features/tanyaAhli";
+import React, { useEffect, useState } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "@/config/firebase";
+import { CardAhli } from "@/features/tanyaAhli";
 import { IAhli } from "@/interface";
+import { Search } from "@/components/atoms";
 import { useLoading } from "@/context/Loading";
+import { TailSpin, ThreeDots } from "react-loader-spinner";
 
 export const TanyaAhli: React.FC = () => {
-  const { user } = useAuth();
-  const router = useRouter();
-  const { isLoading, setLoading } = useLoading();
   const [psychologists, setPsychologists] = useState<IAhli[]>([]);
   const [filteredPsychologists, setFilteredPsychologists] = useState<
     IAhli[] | null
   >(null);
   const [filterText, setFilterText] = useState<string>("");
+  const { isLoading, setLoading } = useLoading();
 
   useEffect(() => {
-    if (user) {
-      router.push("/tanyaahli");
-    } else {
-      fetchData();
-    }
-  }, [user]);
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const q = query(
+          collection(db, "user"),
+          where("role", "==", "psikologi"),
+        );
+        const querySnapshot = await getDocs(q);
+        const data = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          name: doc.data().name,
+          speciality: doc.data().speciality,
+          age: doc.data().age,
+          rating: doc.data().rating,
+          onClickPromise: () => console.log("Buat Janji clicked"),
+          onClickChat: () => console.log("Chat clicked"),
+        })) as IAhli[];
+        setPsychologists(data);
+        setFilteredPsychologists(data);
+      } catch (error) {
+        console.error("Error fetching psychologists:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const q = query(collection(db, "user"), where("role", "==", "psikologi"));
-      const querySnapshot = await getDocs(q);
-      const data = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        name: doc.data().name,
-        speciality: doc.data().speciality,
-        age: doc.data().age,
-        rating: doc.data().rating,
-        onClickPromise: () => console.log("Buat Janji clicked"),
-        onClickChat: () => console.log("Chat clicked"),
-      })) as IAhli[];
-      setPsychologists(data);
-      setFilteredPsychologists(data);
-    } catch (error) {
-      console.error("Error fetching psychologists:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    fetchData();
+  }, [setLoading]);
 
   const handleFilterTextChange = (text: string) => {
     setFilterText(text);

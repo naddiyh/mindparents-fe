@@ -28,12 +28,6 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  if (request.nextUrl.pathname.startsWith("/tanyaahli")) {
-    if (!user) {
-      return NextResponse.redirect(new URL("/login", request.url));
-    }
-  }
-
   if (request.nextUrl.pathname.startsWith("/chat")) {
     if (!user) {
       return NextResponse.redirect(new URL("/login", request.url));
