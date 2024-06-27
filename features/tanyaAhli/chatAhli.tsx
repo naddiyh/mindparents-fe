@@ -133,9 +133,16 @@ export const ChatAhli: React.FC<ChatModalProps> = ({
     }
   };
 
+  const formatTimestamp = (timestamp: number) => {
+    const date = new Date(timestamp);
+    return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  };
+
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-end justify-center pb-6 ${show ? "block" : "hidden"}`}
+      className={`fixed inset-0 z-50 flex items-end justify-center pb-6 ${
+        show ? "block" : "hidden"
+      }`}
     >
       <div className="w-full max-w-xl overflow-hidden rounded-lg bg-white shadow-xl">
         <div className="flex items-center justify-between bg-primary-purple px-6 py-3">
@@ -150,7 +157,11 @@ export const ChatAhli: React.FC<ChatModalProps> = ({
               {psychologists.map((psychologist) => (
                 <button
                   key={psychologist.id}
-                  className={`w-full px-4 py-2 text-left text-text-s hover:bg-gray-100 ${activeChat === psychologist.id ? "bg-gray-200 font-bold" : ""}`}
+                  className={`w-full px-4 py-2 text-left text-text-s hover:bg-gray-100 ${
+                    activeChat === psychologist.id
+                      ? "bg-gray-200 font-bold"
+                      : ""
+                  }`}
                   onClick={() => {
                     setActiveChat(psychologist.id);
                     fetchMessages(psychologist.id);
@@ -161,15 +172,20 @@ export const ChatAhli: React.FC<ChatModalProps> = ({
               ))}
             </div>
           </div>
-          <div className="flex w-[70%] flex-col">
-            <div className="h-full overflow-y-auto px-4 py-2">
-              {messages.map((message, index) => (
+          <div className="flex w-[70%] flex-col ">
+            <div className=" h-full overflow-y-auto px-4 py-2">
+              {messages.map((message) => (
                 <div
                   key={message.id}
-                  className={`mb-3 ${message.senderId === userId ? "text-right" : "text-left"}`}
+                  className={`mb-3 ${
+                    message.senderId === userId ? "text-right" : "text-left"
+                  }`}
                 >
-                  <p className="inline-block rounded-lg bg-gray-100 px-4 py-2">
-                    {message.text}
+                  <p className="flex w-fit rounded-lg bg-gray-100 px-3 py-2">
+                    <p className=" pr-3">{message.text}</p>
+                    <span className="pt-3 text-[10px] text-gray-500 ">
+                      {formatTimestamp(message.timestamp)}
+                    </span>
                   </p>
                 </div>
               ))}
