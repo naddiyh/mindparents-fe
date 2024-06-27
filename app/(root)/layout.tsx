@@ -1,8 +1,10 @@
 // import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
-import { MyComponent } from "../aybubot/voiceflow";
+
 import Providers from "../providers";
 import { Footer } from "@/components/Footer";
+import { Bot } from "@/features/Aybubot";
+import { UpButton } from "@/components/atoms";
 
 export default function MainLayout({
   children,
@@ -14,9 +16,8 @@ export default function MainLayout({
       <Providers>
         <Navbar />
         {children}
-        <script type="script/javascript">
-          <MyComponent />
-        </script>
+        <Bot />
+        <UpButton />
         <Footer />
       </Providers>
     </main>
