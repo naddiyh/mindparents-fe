@@ -17,7 +17,6 @@ const ALLOWED_TOPICS = [
   "kesehatan",
   "kehamilan",
   "perkembangan anak",
-  "masalah anak",
   "masalah kehamilan",
   "persiapan",
   "orang tua",
@@ -39,7 +38,7 @@ const ALLOWED_TOPICS = [
   "masalah orang tua",
   "anak sakit",
   "anak cengeng",
-  "komunikasih anak",
+  "komunikasi anak",
   "gizi anak",
   "pola asuh",
   "tumbuh kembang",
@@ -47,6 +46,9 @@ const ALLOWED_TOPICS = [
   "pengasuhan anak",
   "pernikahan",
   "finansial keluarga",
+  "menjadi orangtua",
+  "peran orangtua",
+  "tugas orangtua"
 ];
 
 export default async function handler(
@@ -63,9 +65,18 @@ export default async function handler(
     return res.status(400).json({ error: "Prompt is required" });
   }
 
+  const lowercasePrompt = prompt.toLowerCase();
+
+  // Check for specific phrase
+  if (lowercasePrompt === "apa itu mindparents") {
+    return res.status(200).json({
+      completion: "Mindparents adalah aplikasi sistem informasi",
+    });
+  }
+
   // Check if the prompt is related to allowed topics
   const isTopicAllowed = ALLOWED_TOPICS.some((topic) =>
-    prompt.toLowerCase().includes(topic),
+    lowercasePrompt.includes(topic),
   );
   if (!isTopicAllowed) {
     return res.status(200).json({
@@ -73,12 +84,12 @@ export default async function handler(
     });
   }
 
-  const fetchResponse = async (retryCount = 0): Promise<any> => {
+  const fetchResponse = async (retryCount = 0): Promise<string> => {
     try {
       const response = await axios.post(
         "https://api.openai.com/v1/chat/completions",
         {
-          model: "gpt-4",
+          model: "gpt-4", // Ganti dengan model yang sesuai, seperti gpt-4 jika tersedia
           messages: [{ role: "user", content: prompt }],
           max_tokens: 350,
         },
@@ -90,7 +101,7 @@ export default async function handler(
         },
       );
 
-      if (response.data.choices && response.data.choices.length > 0) {
+      if (response.data && response.data.choices && response.data.choices.length > 0) {
         return response.data.choices[0].message.content;
       } else {
         return "No response from OpenAI.";
@@ -106,7 +117,11 @@ export default async function handler(
         );
         return fetchResponse(retryCount + 1);
       } else {
-        throw err;
+        console.error(
+          "Error from OpenAI API:",
+          err.response ? err.response.data : err.message,
+        );
+        throw new Error("Error fetching response from OpenAI API");
       }
     }
   };
@@ -115,10 +130,7 @@ export default async function handler(
     const completion = await fetchResponse(0);
     res.status(200).json({ completion });
   } catch (err: any) {
-    console.error(
-      "Error generating response:",
-      err.response ? err.response.data : err.message,
-    );
+    console.error("Error generating response:", err.message);
     res.status(500).json({ error: "Error generating response" });
   }
 }
